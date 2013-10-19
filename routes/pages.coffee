@@ -19,9 +19,11 @@ exports.show = (req, res) ->
     if !result
       firebase_record = new Firebase(firebase_url+cache_key)
       firebase_record.on 'value', (data) ->
-        res.send '404 not exist' unless data
+        res.send '404 not exist' unless data.val()
         compile.compileStatic data.val(), (error, content) ->
-          client.set content.name, content
+          console.log data.val()
+          console.log error, content
+          client.set data.val().name, content
           res.send content.toString()
     else
       res.send result.toString()
@@ -30,7 +32,7 @@ exports.save = (req, res) ->
   logger.info "Received #{req.protocol} GET for #{req.url} from #{req.ip}"
   data =
     name: 'user1'      
-    theme: 'dev'
+    theme: 'cardolin'
     bricks: [{
       type: 'meta'
       content:

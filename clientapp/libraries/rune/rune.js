@@ -8,7 +8,7 @@ var jade = require("jade");
  */
 exports.renderPage = function(content, template, callback) {
   var filename = __dirname + '/../../../clienttemplates/themes/' + content.theme + '/index.jade';
-  var opt = { filename: content.theme + "/index", pretty: true, content: content };
+  var opt = { filename: content.theme + "/index", pretty: true, data: content };
   jade.renderFile(filename, opt, function(err, html) {
     callback(err, html);
   });
