@@ -1,10 +1,10 @@
 extends layout
 
 block head
+  link(href='http://fonts.googleapis.com/css?family=Raleway:400,800', rel='stylesheet', type='text/css')
+  link(href='/css/cardolin.min.css', rel='stylesheet', type='text/css')
 
 block content
-  h3 sub-title
-  p text
 
   for item, i in data.bricks
     context = data.bricks[i].content
@@ -12,3 +12,5 @@ block content
       include meta
     else if item.type == "markdown"
       include markdown
+    else if item.type == "image"
+      include image
