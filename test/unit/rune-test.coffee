@@ -2,7 +2,7 @@ async       = require 'async'
 {assert}    = require 'chai'
 sinon       = require 'sinon'
 
-rune        = require '../../clientapp/models/rune.js'
+rune        = require '../../clientapp/libraries/rune/rune.js'
 
 themes = {
 	plain: {
