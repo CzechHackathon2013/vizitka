@@ -19,5 +19,5 @@ exports.tpl = (req, res) ->
 exports.compileStatic = (key, cb) ->
   swig.compileFile __dirname + '/../views/card-data.html', {}, (err, tpl) ->
     cb err, null if err
-    html = tpl { myname: "Pepa" }
+    html = tpl { myname: key }
     cb err, html
