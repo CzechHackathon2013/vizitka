@@ -2,6 +2,9 @@ express        = require 'express'
 expressWinston = require 'express-winston'
 cons           = require 'consolidate'
 swig           = require 'swig'
+Moonboots      = require 'moonboots'
+templatizer    = require 'templatizer'
+# config         = require 'getconfig'
 
 config         = require './lib/config'
 logging        = require './lib/logging'
@@ -9,6 +12,7 @@ compile        = require './lib/compile'
 
 routes         = require './routes/index'
 pages          = require './routes/pages'
+
 
 # Init
 logger = logging.getLogger "default"
@@ -34,6 +38,39 @@ app.configure 'development', () ->
 
 app.configure 'production', () ->
   app.use express.errorHandler()
+
+# Configure Moonboots to serve our client application
+clientApp = new Moonboots(
+  jsFileName: "onepage"
+  cssFileName: "onepage"
+  main: __dirname + "/clientapp/app.js"
+  # developmentMode: config.isDev
+  developmentMode: process.env.NODE_ENV == "development"
+  libraries: [__dirname + "/clientapp/libraries/zepto.js"]
+  stylesheets: [__dirname + "/public/css/bootstrap.css", __dirname + "/public/css/app.css"]
+  browserify:
+    debug: false
+  server: app
+  beforeBuild: ->
+    templatizer __dirname + "/clienttemplates", __dirname + "/clientapp/templates.js"
+)
+
+# use a cookie to send config items to client
+clientSettingsMiddleware = (req, res, next) ->
+  res.cookie "config", JSON.stringify(config.client)
+  next()
+
+# demo server
+api = require("./fakeApi.coffee")
+app.get '/api/people', api.list
+app.get '/api/people/:id', api.get
+app.delete '/api/people/:id', api.delete
+app.put '/api/people/:id', api.update
+app.post '/api/people', api.add
+
+
+# configure our main route that will serve our moonboots app
+app.get "*", clientSettingsMiddleware, clientApp.html()
 
 # Routes
 app.get '/', routes.index
