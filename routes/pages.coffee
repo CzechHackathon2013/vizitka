@@ -4,7 +4,7 @@ getconfig         = require 'getconfig'
 Firebase       = require('firebase')
 
 config         = require '../lib/config'
-compile         = require '../lib/compile'
+rune           = require '../clientapp/libraries/rune/rune.js'
 
 client = new memjs.Client.create()
 firebase = new Firebase(getconfig['client']['firebase']['endpoint'])
@@ -23,7 +23,9 @@ exports.show = (req, res) ->
         firebase_record = new Firebase(getconfig['client']['firebase']['endpoint'] + "users/" + ref_data.val().user_id + "/" + cache_key)
         firebase_record.on 'value', (data) ->
           res.send '500 error' unless data.val()
-          compile.compileStatic data.val(), (error, content) ->
+          rune.renderPage data.val(), (error, content) ->
+            console.log data.val()
+            console.log error, content
             client.set data.val().name, content
             res.send content.toString()
     else

@@ -69,7 +69,7 @@ exports.pages.info = function anonymous(locals) {
 exports.pages.login = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<section class="page home"><h2>Log in</h2><p><a class="login btn btn-primary">Log in with facebook</a></p></section>');
+        buf.push('<section class="page home"><h2>Log in</h2><div class="alert alert-danger hidden"></div><p><a class="login btn btn-primary">Log in with facebook</a></p></section>');
     }
     return buf.join("");
 };
@@ -78,7 +78,13 @@ exports.pages.login = function anonymous(locals) {
 exports.themes.cardolin.image = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<img class="jade"/>');
+        buf.push('<div class="row m-image-text"><div class="large-3 columns"><img' + jade.attrs({
+            src: context.image,
+            alt: context.alt
+        }, {
+            src: true,
+            alt: true
+        }) + '/></div><div class="large-9 columns"><p>' + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p></div></div>");
     }
     return buf.join("");
 };
@@ -87,7 +93,7 @@ exports.themes.cardolin.image = function anonymous(locals) {
 exports.themes.cardolin.index = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title></head><body><h1>Jade - node template engine</h1><p>Get on it!</p><div id="content"><h3>sub-title</h3><p>text</p>');
+        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title><link href="http://fonts.googleapis.com/css?family=Raleway:400,800" rel="stylesheet" type="text/css"><link href="/css/cardolin.min.css" rel="stylesheet" type="text/css"></head><body><div id="content">');
         (function() {
             var $$obj = data.bricks;
             if ("number" == typeof $$obj.length) {
@@ -95,9 +101,61 @@ exports.themes.cardolin.index = function anonymous(locals) {
                     var item = $$obj[i];
                     var context = data.bricks[i].content;
                     if (item.type == "meta") {
-                        buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img></div>");
+                        buf.push('<div class="row m-meta"><div class="large-4 columns text-center"><img' + jade.attrs({
+                            terse: true,
+                            src: context.photo,
+                            "class": "main-foto"
+                        }, {
+                            src: true
+                        }) + '></div><div class="large-8 columns"><h1>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h1><h3>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + '</p><p class="contact"><a href="mailto: context.email" class="email">' + jade.escape(null == (jade.interp = context.email) ? "" : jade.interp) + '</a><br>mobile:<span class="phone">' + jade.escape(null == (jade.interp = context.phone) ? "" : jade.interp) + "</span><br>");
+                        if (context.linkedin) {
+                            buf.push("<a" + jade.attrs({
+                                terse: true,
+                                href: context.linkedin,
+                                "class": "linkedin"
+                            }, {
+                                href: true
+                            }) + ">LinkedIn</a>");
+                        }
+                        if (context.facebook) {
+                            buf.push("<a" + jade.attrs({
+                                terse: true,
+                                href: context.facebook,
+                                "class": "facebook"
+                            }, {
+                                href: true
+                            }) + ">Facebook</a>");
+                        }
+                        if (context.twitter) {
+                            buf.push("<a" + jade.attrs({
+                                terse: true,
+                                href: context.twitter,
+                                "class": "twitter"
+                            }, {
+                                href: true
+                            }) + ">Twitter</a>");
+                        }
+                        if (context.dribble) {
+                            buf.push("<a" + jade.attrs({
+                                terse: true,
+                                href: context.dribble,
+                                "class": "dribble"
+                            }, {
+                                href: true
+                            }) + ">Dribble</a>");
+                        }
+                        buf.push("</p></div></div>");
                     } else if (item.type == "markdown") {
-                        buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+                        buf.push('<div class="row m-markdown"><div class="large-8 large-offset-3 columns"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div></div>");
+                    } else if (item.type == "image") {
+                        buf.push('<div class="row m-image-text"><div class="large-3 columns"><img' + jade.attrs({
+                            terse: true,
+                            src: context.image,
+                            alt: context.alt
+                        }, {
+                            src: true,
+                            alt: true
+                        }) + '></div><div class="large-9 columns"><p>' + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p></div></div>");
                     }
                 }
             } else {
@@ -108,9 +166,61 @@ exports.themes.cardolin.index = function anonymous(locals) {
                         var item = $$obj[i];
                         var context = data.bricks[i].content;
                         if (item.type == "meta") {
-                            buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img></div>");
+                            buf.push('<div class="row m-meta"><div class="large-4 columns text-center"><img' + jade.attrs({
+                                terse: true,
+                                src: context.photo,
+                                "class": "main-foto"
+                            }, {
+                                src: true
+                            }) + '></div><div class="large-8 columns"><h1>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h1><h3>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + '</p><p class="contact"><a href="mailto: context.email" class="email">' + jade.escape(null == (jade.interp = context.email) ? "" : jade.interp) + '</a><br>mobile:<span class="phone">' + jade.escape(null == (jade.interp = context.phone) ? "" : jade.interp) + "</span><br>");
+                            if (context.linkedin) {
+                                buf.push("<a" + jade.attrs({
+                                    terse: true,
+                                    href: context.linkedin,
+                                    "class": "linkedin"
+                                }, {
+                                    href: true
+                                }) + ">LinkedIn</a>");
+                            }
+                            if (context.facebook) {
+                                buf.push("<a" + jade.attrs({
+                                    terse: true,
+                                    href: context.facebook,
+                                    "class": "facebook"
+                                }, {
+                                    href: true
+                                }) + ">Facebook</a>");
+                            }
+                            if (context.twitter) {
+                                buf.push("<a" + jade.attrs({
+                                    terse: true,
+                                    href: context.twitter,
+                                    "class": "twitter"
+                                }, {
+                                    href: true
+                                }) + ">Twitter</a>");
+                            }
+                            if (context.dribble) {
+                                buf.push("<a" + jade.attrs({
+                                    terse: true,
+                                    href: context.dribble,
+                                    "class": "dribble"
+                                }, {
+                                    href: true
+                                }) + ">Dribble</a>");
+                            }
+                            buf.push("</p></div></div>");
                         } else if (item.type == "markdown") {
-                            buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+                            buf.push('<div class="row m-markdown"><div class="large-8 large-offset-3 columns"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div></div>");
+                        } else if (item.type == "image") {
+                            buf.push('<div class="row m-image-text"><div class="large-3 columns"><img' + jade.attrs({
+                                terse: true,
+                                src: context.image,
+                                alt: context.alt
+                            }, {
+                                src: true,
+                                alt: true
+                            }) + '></div><div class="large-9 columns"><p>' + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p></div></div>");
                         }
                     }
                 }
@@ -125,7 +235,7 @@ exports.themes.cardolin.index = function anonymous(locals) {
 exports.themes.cardolin.layout = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title></head><body><h1>Jade - node template engine</h1><p>Get on it!</p><div id="content"></div></body></html>');
+        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title></head><body><div id="content"></div></body></html>');
     }
     return buf.join("");
 };
@@ -134,7 +244,7 @@ exports.themes.cardolin.layout = function anonymous(locals) {
 exports.themes.cardolin.markdown = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+        buf.push('<div class="row m-markdown"><div class="large-8 large-offset-3 columns"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div></div>");
     }
     return buf.join("");
 };
@@ -143,7 +253,45 @@ exports.themes.cardolin.markdown = function anonymous(locals) {
 exports.themes.cardolin.meta = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img/></div>");
+        buf.push('<div class="row m-meta"><div class="large-4 columns text-center"><img' + jade.attrs({
+            src: context.photo,
+            "class": "main-foto"
+        }, {
+            src: true
+        }) + '/></div><div class="large-8 columns"><h1>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h1><h3>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + '</p><p class="contact"><a href="mailto: context.email" class="email">' + jade.escape(null == (jade.interp = context.email) ? "" : jade.interp) + '</a><br/>mobile:<span class="phone">' + jade.escape(null == (jade.interp = context.phone) ? "" : jade.interp) + "</span><br/>");
+        if (context.linkedin) {
+            buf.push("<a" + jade.attrs({
+                href: context.linkedin,
+                "class": "linkedin"
+            }, {
+                href: true
+            }) + ">LinkedIn</a>");
+        }
+        if (context.facebook) {
+            buf.push("<a" + jade.attrs({
+                href: context.facebook,
+                "class": "facebook"
+            }, {
+                href: true
+            }) + ">Facebook</a>");
+        }
+        if (context.twitter) {
+            buf.push("<a" + jade.attrs({
+                href: context.twitter,
+                "class": "twitter"
+            }, {
+                href: true
+            }) + ">Twitter</a>");
+        }
+        if (context.dribble) {
+            buf.push("<a" + jade.attrs({
+                href: context.dribble,
+                "class": "dribble"
+            }, {
+                href: true
+            }) + ">Dribble</a>");
+        }
+        buf.push("</p></div></div>");
     }
     return buf.join("");
 };

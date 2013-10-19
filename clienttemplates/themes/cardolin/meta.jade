@@ -1,5 +1,21 @@
-.meta
-  h3= context.name
-  p= context.tagline
-  p= context.description
-  img= context.photo
+.row.m-meta
+  .large-4.columns.text-center
+    img.main-foto(src=context.photo)
+  .large-8.columns
+    h1= context.name
+    h3= context.tagline
+    p= context.description
+    p.contact
+      a.email(href='mailto: context.email')= context.email
+      br
+      | mobile:
+      span.phone= context.phone
+      br
+      if context.linkedin
+        a.linkedin(href=context.linkedin) LinkedIn
+      if context.facebook
+        a.facebook(href=context.facebook) Facebook
+      if context.twitter
+        a.twitter(href=context.twitter) Twitter
+      if context.dribble
+        a.dribble(href=context.dribble) Dribble
