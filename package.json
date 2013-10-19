@@ -20,9 +20,8 @@
     "async": "",
     "consolidate": "",
     "swig": "",
-    "memcache": "",
     "memjs": "",
-
+    "firebase": "",
     "andlog": "0.0.4",
     "backbone": "1.0.0",
     "clientconfig": "0.0.4",
