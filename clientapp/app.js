@@ -3,7 +3,7 @@ var stats = require('loading-stats');
 var Backbone = require('backbone');
 var _ = require('underscore');
 var logger = require('andlog');
-var config = require('clientconfig');
+// var config = require('clientconfig');
 
 var Router = require('./router');
 var tracking = require('./helpers/metrics');
