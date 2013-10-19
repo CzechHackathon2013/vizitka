@@ -23,6 +23,10 @@
     "memcache": ""
   },
   "devDependencies": {
-    "nodemon": ""
+    "nodemon": "",
+    "mocha": "",
+    "chai": "",
+    "chai-things": "",
+    "sinon": ""
   }
 }
