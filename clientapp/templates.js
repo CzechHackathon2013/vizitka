@@ -62,6 +62,15 @@ exports.pages.info = function anonymous(locals) {
     return buf.join("");
 };
 
+// login.jade compiled template
+exports.pages.login = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<section class="page home"><h2>Log in</h2><p><a class="login">Log in with facebook</a></p></section>');
+    }
+    return buf.join("");
+};
+
 
 // attach to window or export with commonJS
 if (typeof module !== "undefined" && typeof module.exports !== "undefined") {

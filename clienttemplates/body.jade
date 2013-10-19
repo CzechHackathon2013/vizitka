@@ -12,3 +12,5 @@ body
             a(href="/info") more info
 
     main#pages
+  //- don't add scripts here, as they are processed through jquery.append(htmlString), and that causes scripts not to be executed (due to workaround for old IE)
+  //- instead add them to app.js - externalScripts

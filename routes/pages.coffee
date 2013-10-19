@@ -1,13 +1,14 @@
 logger         = require('../lib/logging').getLogger "default"
 memjs			     = require('memjs')
 #crypto				 = require('crypto')
+getconfig         = require 'getconfig'
 Firebase       = require('firebase')
 
 config         = require '../lib/config'
 compile         = require '../lib/compile'
 
 client = new memjs.Client.create()
-firebase = new Firebase('https://min-vizitka.firebaseIO-demo.com/')
+firebase = new Firebase(getconfig['client']['firebase']['endpoint'])
 
 firebase.on 'value', (snapshot) ->
   console.log 'data updated over firebase', snapshot.val()

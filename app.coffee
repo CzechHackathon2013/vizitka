@@ -4,7 +4,7 @@ cons           = require 'consolidate'
 swig           = require 'swig'
 Moonboots      = require 'moonboots'
 templatizer    = require 'templatizer'
-# config         = require 'getconfig'
+getconfig      = require 'getconfig'
 
 config         = require './lib/config'
 logging        = require './lib/logging'
@@ -44,12 +44,15 @@ clientApp = new Moonboots(
   jsFileName: "onepage"
   cssFileName: "onepage"
   main: __dirname + "/clientapp/app.js"
-  # developmentMode: config.isDev
+  # developmentMode: getconfig.isDev
   developmentMode: process.env.NODE_ENV == "development"
-  libraries: [__dirname + "/clientapp/libraries/zepto.js"]
-  stylesheets: [__dirname + "/public/css/bootstrap.css", __dirname + "/public/css/app.css"]
+  libraries: [
+    __dirname + "/clientapp/libraries/zepto.js"
+    # , __dirname + "/clientapp/libraries/firebase.js"
+  ]
+  stylesheets: [ __dirname + "/public/css/bootstrap.css",  __dirname + "/public/css/app.css" ]
   browserify:
-    debug: false
+    debug: false #process.env.NODE_ENV == "development"
   server: app
   beforeBuild: ->
     templatizer __dirname + "/clienttemplates", __dirname + "/clientapp/templates.js"
@@ -57,7 +60,7 @@ clientApp = new Moonboots(
 
 # use a cookie to send config items to client
 clientSettingsMiddleware = (req, res, next) ->
-  res.cookie "config", JSON.stringify(config.client)
+  res.cookie "config", JSON.stringify(getconfig.client)
   next()
 
 # demo server
