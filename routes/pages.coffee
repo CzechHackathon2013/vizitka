@@ -8,7 +8,7 @@ config         = require '../lib/config'
 compile         = require '../lib/compile'
 
 client = new memjs.Client.create()
-firebase = new Firebase(getconfig['client']['firebase']['endpoint'])
+firebase = new Firebase(getconfig['client']['firebase']['endpoint'] + "pages/")
 
 firebase.on 'value', (snapshot) ->
   console.log 'data updated over firebase', snapshot.val()
@@ -19,7 +19,7 @@ exports.show = (req, res) ->
   cache_key = req.params.page_name
   client.get cache_key, (error, result) ->
     if !result
-      firebase_record = new Firebase(firebase_url+cache_key)
+      firebase_record = new Firebase(getconfig['client']['firebase']['endpoint'] + "pages/" + cache_key)
       firebase_record.on 'value', (data) ->
         res.send '404 not exist' unless data.val()
         compile.compileStatic data.val(), (error, content) ->
