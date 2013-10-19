@@ -1,3 +1,5 @@
+var jade = require("jade");
+
 /**
  *
  * @param data contains { meta:, data: }
@@ -5,7 +7,11 @@
  * @param callback (err, result html)
  */
 exports.renderPage = function(data, pageContext, callback) {
-  callback(null, '<div class="page">hello!</div>');
+  var filename = __dirname + '../../views/' + pageContext.theme.id + '/index.jade';
+  var opt = { filename: pageContext.theme.id + "/index", pretty: true, globals: data };
+  jade.renderFile(filename, opt, function(err, html) {
+    callback(err, html);
+  });
 };
 
 /**

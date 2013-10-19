@@ -1,0 +1,12 @@
+{
+  "name": "Dev theme",
+  "id": "dev",
+  "template": {
+    "layout": "layout.jade",
+    "bricks": {
+      "meta": "meta.jade",
+      "markdown": "markdown.jade",
+      "image": "image.jade"
+    }
+  }
+}
