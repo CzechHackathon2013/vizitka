@@ -39,6 +39,10 @@
     "favicon-setter": "0.1.1"
   },
   "devDependencies": {
-    "nodemon": ""
+    "nodemon": "",
+    "mocha": "",
+    "chai": "",
+    "chai-things": "",
+    "sinon": ""
   }
 }
