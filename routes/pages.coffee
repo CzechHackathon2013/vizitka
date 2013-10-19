@@ -54,9 +54,14 @@ exports.save = (req, res) ->
         alt: 'Chemix'
         description: 'some markdown, optional'
     }]
-  firebase.child('users').child(req.params.user_id).child(req.params.page_name).set data, (error) ->
-    console.log "error push", error if error
-    firebase.child('pages').child(req.params.page_name).set {user_id: req.params.user_id}, (error) ->
-      console.log "error push ref", error if error
-      res.json error
+  new Firebase(getconfig['client']['firebase']['endpoint'] + "pages/" + req.params.page_name).on 'value', (data) ->
+    if data.val()
+      res.send 'name already taken'
+    else
+      firebase.child('users').child(req.params.user_id).child(req.params.page_name).set data, (error) ->
+        console.log "error push", error if error
+        firebase.child('pages').child(req.params.page_name).set {user_id: req.params.user_id}, (error) ->
+          console.log "error push ref", error if error
+          res.json error
 
+#TODO: refactor/wrap model storage access
