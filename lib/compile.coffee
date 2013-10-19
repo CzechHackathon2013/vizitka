@@ -18,10 +18,10 @@ exports.tpl = (req, res) ->
 
     res.send html
 
-exports.compileStatic = (key, content, cb) ->
+exports.compileStatic = (content, cb) ->
   data =
-    meta:
-      theme: 'dev'
+    theme: 'dev'
+    name: 'page1'
     bricks: [{
       type: 'meta'
       content:
@@ -41,15 +41,11 @@ exports.compileStatic = (key, content, cb) ->
         description: 'some markdown, optional'
     }]
 
-  pageContext =
-    theme:
-      name: 'Dev theme'
-      id: 'dev'
-      template:
-        layout: 'layout.jade'
-        bricks:
-          meta: 'meta.jade'
-          markdown: 'markdown.jade'
-          image: 'image.jade'
+  template =
+    layout: 'layout.jade'
+    bricks:
+      meta: 'meta.jade'
+      markdown: 'markdown.jade'
+      image: 'image.jade'
 
-  rune.renderPage data, pageContext, cb
+  rune.renderPage content, template, cb

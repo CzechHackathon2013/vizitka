@@ -6,9 +6,9 @@ var jade = require("jade");
  * @param pageContext page variables, now { theme: theme definition}
  * @param callback (err, result html)
  */
-exports.renderPage = function(data, pageContext, callback) {
-  var filename = __dirname + '/../../../clienttemplates/themes/' + pageContext.theme.id + '/index.jade';
-  var opt = { filename: pageContext.theme.id + "/index", pretty: true, data: data };
+exports.renderPage = function(content, template, callback) {
+  var filename = __dirname + '/../../../clienttemplates/themes/' + content.theme + '/index.jade';
+  var opt = { filename: content.theme + "/index", pretty: true, content: content };
   jade.renderFile(filename, opt, function(err, html) {
     callback(err, html);
   });
