@@ -37,7 +37,13 @@ module.exports = HumanModel.define({
 
         app.trigger('login', this);
       } else {
-        this.loginError = error;
+        if (error) {
+          // real error
+          this.loginError = error;
+        } else {
+          // user cancelled
+          this.loginError = undefined;
+        }
         this.firebaseUser = undefined;
       }
     }, this));
