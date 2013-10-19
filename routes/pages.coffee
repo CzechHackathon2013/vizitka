@@ -1,31 +1,31 @@
 logger         = require('../lib/logging').getLogger "default"
 memjs			     = require('memjs')
-#crypto				 = require('crypto')
 Firebase       = require('firebase')
 
 config         = require '../lib/config'
 compile         = require '../lib/compile'
 
 client = new memjs.Client.create()
-firebase = new Firebase('https://min-vizitka.firebaseIO-demo.com/')
+firebase = new Firebase('https://min-vizitka.firebaseIO-demo.com/pages/')
 
 firebase.on 'value', (snapshot) ->
-  console.log 'data updated over firebase', snapshot.val()
+  console.log 'loaded data from firebase', snapshot.val()
 
 exports.show = (req, res) ->
   logger.info "Received #{req.protocol} GET for #{req.url} from #{req.ip}"
-#  key_hash = crypto.createHash('sha1')
   cache_key = req.params.page_name
-#  cache_key = key_hash.update(req.params.page_name).digest('base64') #TODO: propably not needed
-  compile.compileStatic cache_key, (error, content) ->
-    client.get cache_key, (error, result) ->
-      if !result
-        client.set cache_key, content
-        result = content
+  client.get cache_key, (error, result) ->
+    if !result
+      firebase_record = new Firebase('https://min-vizitka.firebaseIO-demo.com/pages/'+cache_key)
+      firebase_record.on 'value', (data) ->
+        compile.compileStatic_old cache_key, data.val(), (error, content) ->
+          client.set cache_key, content
+          res.send content.toString()
+    else
       res.send result.toString()
 
 exports.save = (req, res) ->
   logger.info "Received #{req.protocol} GET for #{req.url} from #{req.ip}"
-  firebase.push {key: req.params.page_name, content: req.params.content, owner: 1234}, (error) ->
+  firebase.child(req.params.page_name).set {key: req.params.page_name, content: req.params.content, owner: 1234}, (error) ->
     console.log "pushed" unless error
     res.send {error: error}
