@@ -7,7 +7,7 @@ var jade = require("jade");
  * @param callback (err, result html)
  */
 exports.renderPage = function(data, pageContext, callback) {
-  var filename = __dirname + '/../../views/themes/' + pageContext.theme.id + '/index.jade';
+  var filename = __dirname + '/../../../clienttemplates/themes/' + pageContext.theme.id + '/index.jade';
   var opt = { filename: pageContext.theme.id + "/index", pretty: true, data: data };
   jade.renderFile(filename, opt, function(err, html) {
     callback(err, html);

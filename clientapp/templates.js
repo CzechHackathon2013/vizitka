@@ -7,6 +7,8 @@ var jade = exports.jade=function(exports){Array.isArray||(Array.isArray=function
 // create our folder objects
 exports.includes = {};
 exports.pages = {};
+exports.themes = {};
+exports.themes.dev = {};
 
 // body.jade compiled template
 exports.body = function anonymous(locals) {
@@ -58,6 +60,80 @@ exports.pages.info = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
         buf.push('<section class="page pageTwo"><h2>More Info</h2><p>This is a demo app by <a href="http://twitter.com">Henrik Joreteg</a>.</p><h4>Relevant links:</h4><ul><li> <a href="http://humanjavascript.com">human javascript</a> &mdash; the book</li><li> <a href="https://github.com/HenrikJoreteg/humanjs-sample-app">github repo </a> &mdash; for this app</li><li> <a href="http://andyet.com">&yet</a> &mdash; The company behind this effort.</li></ul><h4>Finding Packages</h4><ul><li><a href="http://projects.joreteg.com/humanjs-resources/">humanjs resources</a> &mdash; A few curated modules with a quick search</li><li><a href="https://github.com/component">Component </a> &mdash; Lots of tools here in tiny modules. Most are on npm as {{name}}-component</li><li><a href="http://browserify.org/search">Browserify module search</a> &mdash; Searches npm for browserify packages</li></ul><h4>Apps Built this way</h4><ul><li> <a href="http://andbang.com">And Bang</a> &mdash; Team same-pagification tool. Realtime chat + task management</li><li> <a href="http://talky.io">Talky </a> &mdash; Free, zero-setup, no-account, peer-to-peer encrypted video calls</li></ul></section>');
+    }
+    return buf.join("");
+};
+
+// image.jade compiled template
+exports.themes.dev.image = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<img class="jade"/>');
+    }
+    return buf.join("");
+};
+
+// index.jade compiled template
+exports.themes.dev.index = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title></head><body><h1>Jade - node template engine</h1><p>Get on it!</p><div id="content"><h3>sub-title</h3><p>text</p>');
+        (function() {
+            var $$obj = data.bricks;
+            if ("number" == typeof $$obj.length) {
+                for (var i = 0, $$l = $$obj.length; i < $$l; i++) {
+                    var item = $$obj[i];
+                    var context = data.bricks[i].content;
+                    if (item.type == "meta") {
+                        buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img></div>");
+                    } else if (item.type == "markdown") {
+                        buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+                    }
+                }
+            } else {
+                var $$l = 0;
+                for (var i in $$obj) {
+                    $$l++;
+                    if ($$obj.hasOwnProperty(i)) {
+                        var item = $$obj[i];
+                        var context = data.bricks[i].content;
+                        if (item.type == "meta") {
+                            buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img></div>");
+                        } else if (item.type == "markdown") {
+                            buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+                        }
+                    }
+                }
+            }
+        }).call(this);
+        buf.push("</div></body></html>");
+    }
+    return buf.join("");
+};
+
+// layout.jade compiled template
+exports.themes.dev.layout = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title></head><body><h1>Jade - node template engine</h1><p>Get on it!</p><div id="content"></div></body></html>');
+    }
+    return buf.join("");
+};
+
+// markdown.jade compiled template
+exports.themes.dev.markdown = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+    }
+    return buf.join("");
+};
+
+// meta.jade compiled template
+exports.themes.dev.meta = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img/></div>");
     }
     return buf.join("");
 };
