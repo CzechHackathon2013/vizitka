@@ -11,7 +11,6 @@ config         = require './lib/config'
 # getconfig must go after config because it uses env
 getconfig      = require 'getconfig'
 logging        = require './lib/logging'
-compile        = require './lib/compile'
 
 routes         = require './routes/index'
 pages          = require './routes/pages'
@@ -86,7 +85,6 @@ app.post '/api/people', api.add
 
 # Routes
 # app.get '/', routes.index
-app.get '/compile', compile.tpl
 
 app.get '/pages/:page_name', pages.show
 app.get '/create/:page_name', pages.save
@@ -102,5 +100,13 @@ app.get "*", clientSettingsMiddleware, clientApp.html()
 app.listen process.env.PORT, () ->
   logger.info "Listening at port: #{process.env.PORT}"
 
-#compile.compileStatic "chemix", {}, (err, html) ->
-#  console.error "chemix: ", err, html
+rune = require './clientapp/libraries/rune/rune.js'
+brickCfg =
+  type: 'meta'
+  content:
+    name: 'Chemix'
+    tagline: 'I am chemix'
+    description: 'lorem ipsum'
+    photo: 'http://blog.lafraise.com/fr/wp-content/uploads/2009/10/Chemix.jpg'
+rune.renderBrick brickCfg, "cardolin", (err, html) ->
+  console.error "chemix: ", err, html
