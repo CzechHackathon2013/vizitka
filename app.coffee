@@ -6,9 +6,10 @@ stylus         = require 'stylus'
 fs             = require 'fs'
 Moonboots      = require 'moonboots'
 templatizer    = require 'templatizer'
-getconfig      = require 'getconfig'
 
 config         = require './lib/config'
+# getconfig must go after config because it uses env
+getconfig      = require 'getconfig'
 logging        = require './lib/logging'
 compile        = require './lib/compile'
 
