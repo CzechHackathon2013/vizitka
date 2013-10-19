@@ -31,7 +31,7 @@ app.configure 'production', () ->
 # Routes
 app.get '/', routes.index
 
-app.get '/pages', pages.index
+app.get '/pages/:name', pages.show
 
 # Error debug - here we cause an error in the pipeline so we see express-winston in action
 app.get '/error', (req, res, next) ->
