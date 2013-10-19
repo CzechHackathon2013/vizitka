@@ -18,7 +18,8 @@
     "express-winston": "",
     "winston-papertrail": "",
     "async": "",
-    "swig": ""
+    "swig": "",
+    "memcache": ""
   },
   "devDependencies": {
     "nodemon": ""
