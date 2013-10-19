@@ -2,6 +2,8 @@ logger         = require('../lib/logging').getLogger "default"
 memcache			 = require('memcache')
 crypto				 = require('crypto')
 
+config         = require './lib/config'
+
 client = new memcache.Client(11211, 'localhost')
 client.connect()
 
