@@ -42,5 +42,9 @@ module.exports = HumanModel.define({
       }
     }, this));
     auth.login('facebook', {});
+  },
+  logout: function () {
+    this.firebaseUser = undefined;
+    app.trigger('logout', this);
   }
 });
