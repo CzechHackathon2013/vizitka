@@ -5,8 +5,9 @@ Firebase       = require('firebase')
 config         = require '../lib/config'
 compile         = require '../lib/compile'
 
+firebase_url = 'https://min-vizitka.firebaseIO.com/pages/'
 client = new memjs.Client.create()
-firebase = new Firebase('https://min-vizitka.firebaseIO-demo.com/pages/')
+firebase = new Firebase(firebase_url)
 
 firebase.on 'value', (snapshot) ->
   console.log 'loaded data from firebase', snapshot.val()
@@ -16,7 +17,7 @@ exports.show = (req, res) ->
   cache_key = req.params.page_name
   client.get cache_key, (error, result) ->
     if !result
-      firebase_record = new Firebase('https://min-vizitka.firebaseIO-demo.com/pages/'+cache_key)
+      firebase_record = new Firebase(firebase_url+cache_key)
       firebase_record.on 'value', (data) ->
         compile.compileStatic_old cache_key, data.val(), (error, content) ->
           client.set cache_key, content
