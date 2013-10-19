@@ -1,12 +1,14 @@
 express        = require 'express'
 expressWinston = require 'express-winston'
+cons           = require 'consolidate'
+swig           = require 'swig'
 
 config         = require './lib/config'
 logging        = require './lib/logging'
 compile        = require './lib/compile'
 
 routes         = require './routes/index'
-pages          = require './routes/pages'
+#pages          = require './routes/pages'
 
 # Init
 logger = logging.getLogger "default"
@@ -14,6 +16,10 @@ app = express()
 
 # Configuraion
 app.configure () ->
+  app.engine 'html', cons.swig
+  app.set 'views', __dirname + '/views'
+  app.set 'view engine', 'html'
+  app.set 'view options', { layout: false }
   app.use express.favicon 'public/img/favicon.ico'
   app.use express.static __dirname + '/public'
   app.use express.compress()
@@ -33,7 +39,7 @@ app.configure 'production', () ->
 app.get '/', routes.index
 app.get '/compile', compile.tpl
 
-app.get '/pages/:name', pages.show
+#app.get '/pages/:name', pages.show
 
 # Error debug - here we cause an error in the pipeline so we see express-winston in action
 app.get '/error', (req, res, next) ->

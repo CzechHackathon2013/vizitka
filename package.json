@@ -18,6 +18,7 @@
     "express-winston": "",
     "winston-papertrail": "",
     "async": "",
+    "consolidate": "",
     "swig": "",
     "memcache": ""
   },
