@@ -85,5 +85,5 @@ app.get "*", clientSettingsMiddleware, clientApp.html()
 app.listen process.env.PORT, () ->
   logger.info "Listening at port: #{process.env.PORT}"
 
-compile.compileStatic "chemix", (err, html) ->
+compile.compileStatic "chemix", {}, (err, html) ->
   console.error "chemix: ", err, html

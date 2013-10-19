@@ -19,7 +19,8 @@ exports.show = (req, res) ->
     if !result
       firebase_record = new Firebase(firebase_url+cache_key)
       firebase_record.on 'value', (data) ->
-        compile.compileStatic_old cache_key, data.val(), (error, content) ->
+        compile.compileStatic cache_key, data.val(), (error, content) ->
+          console.log "aaaaa", error, content
           client.set cache_key, content
           res.send content.toString()
     else
