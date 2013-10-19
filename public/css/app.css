@@ -1,0 +1,11 @@
+.navbar-default {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -khtml-border-radius: 0;
+  -o-border-radius: 0;
+  -border-radius: 0;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
