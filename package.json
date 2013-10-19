@@ -17,7 +17,8 @@
     "winston": "",
     "express-winston": "",
     "winston-papertrail": "",
-    "async": ""
+    "async": "",
+    "swig": ""
   },
   "devDependencies": {
     "nodemon": ""
