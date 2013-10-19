@@ -40,6 +40,7 @@ app.get '/', routes.index
 app.get '/compile', compile.tpl
 
 app.get '/pages/:page_name', pages.show
+app.post '/pages/:page_name/:content', pages.save
 
 # Error debug - here we cause an error in the pipeline so we see express-winston in action
 app.get '/error', (req, res, next) ->

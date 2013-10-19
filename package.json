@@ -20,7 +20,8 @@
     "async": "",
     "consolidate": "",
     "swig": "",
-    "memjs": ""
+    "memjs": "",
+    "firebase": ""
   },
   "devDependencies": {
     "nodemon": ""
