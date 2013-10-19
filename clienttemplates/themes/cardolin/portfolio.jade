@@ -6,9 +6,10 @@
     else
       img(src=context.image, alt= context.alt)
   .large-9.columns
-    h3
-      | = context.title
-      small= context.subtitle
+    h3= context.title
+      small= ' - ' + context.subtitle
 
     if context.role
       .role= context.role
+
+    p= context.description
