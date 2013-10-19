@@ -6,10 +6,10 @@ rune        = require '../../clientapp/libraries/rune/rune.js'
 
 themes =
   plain:
-    name: 'Plain theme'
-    id: 'plain'
+    name: 'Dev theme'
+    id: 'dev'
     template:
-      layout: 'plain/layout.jade'
+      layout: 'layout.jade'
       bricks:
         meta: 'meta.jade'
         markdown: 'markdown.jade'
@@ -19,7 +19,7 @@ theme = themes.plain
 
 data =
   meta:
-    theme: 'plain'
+    theme: 'dev'
   bricks: [{
     type: 'meta'
     content:

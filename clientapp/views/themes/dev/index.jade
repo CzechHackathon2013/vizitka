@@ -3,5 +3,12 @@ extends layout
 block head
 
 block content
-	h3 sub-title
-	p text
+  h3 sub-title
+  p text
+
+  for item, i in data.bricks
+    context = data.bricks[i].content
+    if item.type == "meta"
+      include meta
+    else if item.type == "markdown"
+      include markdown

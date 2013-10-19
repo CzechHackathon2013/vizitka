@@ -29,7 +29,7 @@ app.configure () ->
   app.use express.compress()
   app.use express.methodOverride()
   app.use express.bodyParser()
-  app.use expressWinston.logger { transports: logging.getTransports("express.logger"), level: "verbose" }
+  #app.use expressWinston.logger { transports: logging.getTransports("express.logger"), level: "verbose" }
   app.use app.router
   app.use expressWinston.errorLogger { transports: logging.getTransports("express.errorLogger"), level: "error" }
 
@@ -74,7 +74,6 @@ app.get "*", clientSettingsMiddleware, clientApp.html()
 
 # Routes
 app.get '/', routes.index
-app.get '/compile', compile.tpl
 
 app.get '/pages/:page_name', pages.show
 app.post '/pages/:page_name/:content', pages.save
@@ -89,3 +88,6 @@ app.get '*', routes.index
 # Start server
 app.listen process.env.PORT, () ->
   logger.info "Listening at port: #{process.env.PORT}"
+
+compile.compileStatic "chemix", (err, html) ->
+  console.error "chemix: ", err, html
