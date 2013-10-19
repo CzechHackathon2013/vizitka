@@ -1,5 +1,6 @@
 {spawn, exec} = require 'child_process'
 {log, error} = console; print = log
+port = 9200
 
 run = (cmd, cb) ->
   child = exec cmd
@@ -18,9 +19,9 @@ shell = (cmds, cb) ->
     error stderr.trim() if err
     cb() if cb
 
-local_prod_env      = "NODE_ENV='production'  PORT=9100 DOMAIN='parsers.local' "
-dev_environment     = "NODE_ENV='development' PORT=9100 DOMAIN='parsers.local' "
-test_environment    = "NODE_ENV='development' PORT=9190 DOMAIN='parsers.local' "
+local_prod_env      = "NODE_ENV='production'  PORT=#{port} DOMAIN='parsers.local' "
+dev_environment     = "NODE_ENV='development' PORT=#{port} DOMAIN='parsers.local' "
+test_environment    = "NODE_ENV='development' PORT=#{port} DOMAIN='parsers.local' "
 debug_environment   = "#{dev_environment}DEBUG=1 "
 
 task 'run', 'Run as a production version', ->
