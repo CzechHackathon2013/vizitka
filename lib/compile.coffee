@@ -18,11 +18,10 @@ exports.tpl = (req, res) ->
 
     res.send html
 
-exports.compileStatic = (key, cb) ->
-
+exports.compileStatic = (content, cb) ->
   data =
-    meta:
-      theme: 'plain'
+    theme: 'dev'
+    name: 'page1'
     bricks: [{
       type: 'meta'
       content:
@@ -42,21 +41,11 @@ exports.compileStatic = (key, cb) ->
         description: 'some markdown, optional'
     }]
 
-  pageContext =
-    theme:
-      name: 'Plain theme'
-      id: 'plain'
-      template:
-        layout: 'plain/layout.jade'
-        bricks:
-          meta: 'meta.jade'
-          markdown: 'markdown.jade'
-          image: 'image.jade'
+  template =
+    layout: 'layout.jade'
+    bricks:
+      meta: 'meta.jade'
+      markdown: 'markdown.jade'
+      image: 'image.jade'
 
-  rune.renderPage data, pageContext, (cb)
-
-exports.compileStatic_old = (key, data, cb) ->
-  swig.compileFile __dirname + '/../views/card-data.html', {}, (err, tpl) ->
-    cb err, null if err
-    html = tpl { myname: key, mycontent: data.content }
-    cb err, html
+  rune.renderPage content, template, cb

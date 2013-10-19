@@ -7,6 +7,9 @@ var jade = exports.jade=function(exports){Array.isArray||(Array.isArray=function
 // create our folder objects
 exports.includes = {};
 exports.pages = {};
+exports.themes = {};
+exports.themes.cardolin = {};
+exports.themes.dev = {};
 
 // body.jade compiled template
 exports.body = function anonymous(locals) {
@@ -67,6 +70,154 @@ exports.pages.login = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
         buf.push('<section class="page home"><h2>Log in</h2><p><a class="login btn btn-primary">Log in with facebook</a></p></section>');
+    }
+    return buf.join("");
+};
+
+// image.jade compiled template
+exports.themes.cardolin.image = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<img class="jade"/>');
+    }
+    return buf.join("");
+};
+
+// index.jade compiled template
+exports.themes.cardolin.index = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title></head><body><h1>Jade - node template engine</h1><p>Get on it!</p><div id="content"><h3>sub-title</h3><p>text</p>');
+        (function() {
+            var $$obj = data.bricks;
+            if ("number" == typeof $$obj.length) {
+                for (var i = 0, $$l = $$obj.length; i < $$l; i++) {
+                    var item = $$obj[i];
+                    var context = data.bricks[i].content;
+                    if (item.type == "meta") {
+                        buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img></div>");
+                    } else if (item.type == "markdown") {
+                        buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+                    }
+                }
+            } else {
+                var $$l = 0;
+                for (var i in $$obj) {
+                    $$l++;
+                    if ($$obj.hasOwnProperty(i)) {
+                        var item = $$obj[i];
+                        var context = data.bricks[i].content;
+                        if (item.type == "meta") {
+                            buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img></div>");
+                        } else if (item.type == "markdown") {
+                            buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+                        }
+                    }
+                }
+            }
+        }).call(this);
+        buf.push("</div></body></html>");
+    }
+    return buf.join("");
+};
+
+// layout.jade compiled template
+exports.themes.cardolin.layout = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title></head><body><h1>Jade - node template engine</h1><p>Get on it!</p><div id="content"></div></body></html>');
+    }
+    return buf.join("");
+};
+
+// markdown.jade compiled template
+exports.themes.cardolin.markdown = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+    }
+    return buf.join("");
+};
+
+// meta.jade compiled template
+exports.themes.cardolin.meta = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img/></div>");
+    }
+    return buf.join("");
+};
+
+// image.jade compiled template
+exports.themes.dev.image = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<img class="jade"/>');
+    }
+    return buf.join("");
+};
+
+// index.jade compiled template
+exports.themes.dev.index = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title></head><body><h1>Jade - node template engine</h1><p>Get on it!</p><div id="content"><h3>sub-title</h3><p>text</p>');
+        (function() {
+            var $$obj = data.bricks;
+            if ("number" == typeof $$obj.length) {
+                for (var i = 0, $$l = $$obj.length; i < $$l; i++) {
+                    var item = $$obj[i];
+                    var context = data.bricks[i].content;
+                    if (item.type == "meta") {
+                        buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img></div>");
+                    } else if (item.type == "markdown") {
+                        buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+                    }
+                }
+            } else {
+                var $$l = 0;
+                for (var i in $$obj) {
+                    $$l++;
+                    if ($$obj.hasOwnProperty(i)) {
+                        var item = $$obj[i];
+                        var context = data.bricks[i].content;
+                        if (item.type == "meta") {
+                            buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img></div>");
+                        } else if (item.type == "markdown") {
+                            buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+                        }
+                    }
+                }
+            }
+        }).call(this);
+        buf.push("</div></body></html>");
+    }
+    return buf.join("");
+};
+
+// layout.jade compiled template
+exports.themes.dev.layout = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<!DOCTYPE html><html lang="en"><head><title>' + jade.escape(null == (jade.interp = pageTitle) ? "" : jade.interp) + '</title></head><body><h1>Jade - node template engine</h1><p>Get on it!</p><div id="content"></div></body></html>');
+    }
+    return buf.join("");
+};
+
+// markdown.jade compiled template
+exports.themes.dev.markdown = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<div class="markdown"><p>' + jade.escape(null == (jade.interp = context.source) ? "" : jade.interp) + "</p></div>");
+    }
+    return buf.join("");
+};
+
+// meta.jade compiled template
+exports.themes.dev.meta = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<div class="meta"><h3>' + jade.escape(null == (jade.interp = context.name) ? "" : jade.interp) + "</h3><p>" + jade.escape(null == (jade.interp = context.tagline) ? "" : jade.interp) + "</p><p>" + jade.escape(null == (jade.interp = context.description) ? "" : jade.interp) + "</p><img/></div>");
     }
     return buf.join("");
 };

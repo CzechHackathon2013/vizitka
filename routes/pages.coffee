@@ -17,16 +17,42 @@ exports.show = (req, res) ->
   logger.info "Received #{req.protocol} GET for #{req.url} from #{req.ip}"
 #  key_hash = crypto.createHash('sha1')
   cache_key = req.params.page_name
-#  cache_key = key_hash.update(req.params.page_name).digest('base64') #TODO: propably not needed
-  compile.compileStatic cache_key, (error, content) ->
-    client.get cache_key, (error, result) ->
-      if !result
-        client.set cache_key, content
-        result = content
+  client.get cache_key, (error, result) ->
+    if !result
+      firebase_record = new Firebase(firebase_url+cache_key)
+      firebase_record.on 'value', (data) ->
+        res.send '404 not exist' unless data.val()
+        compile.compileStatic data.val(), (error, content) ->
+          console.log data.val()
+          console.log error, content
+          client.set data.val().name, content
+          res.send content.toString()
+    else
       res.send result.toString()
 
 exports.save = (req, res) ->
   logger.info "Received #{req.protocol} GET for #{req.url} from #{req.ip}"
-  firebase.push {key: req.params.page_name, content: req.params.content, owner: 1234}, (error) ->
-    console.log "pushed" unless error
-    res.send {error: error}
+  data =
+    name: 'user1'      
+    theme: 'cardolin'
+    bricks: [{
+      type: 'meta'
+      content:
+        name: 'Chemix'
+        tagline: 'I am chemix'
+        description: 'lorem ipsum'
+        photo: 'http://blog.lafraise.com/fr/wp-content/uploads/2009/10/Chemix.jpg'
+    }, {
+      type: 'markdown'
+      content:
+        source: 'Markdown will be here probably'
+    }, {
+      type: 'image'
+      content:
+        image: 'http://blog.lafraise.com/fr/wp-content/uploads/2009/10/Chemix.jpg'
+        alt: 'Chemix'
+        description: 'some markdown, optional'
+    }]
+  firebase.child(req.params.page_name).set data, (error) ->
+    console.log "error push", error if error
+    res.json error
