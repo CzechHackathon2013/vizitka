@@ -19,15 +19,36 @@ exports.show = (req, res) ->
     if !result
       firebase_record = new Firebase(firebase_url+cache_key)
       firebase_record.on 'value', (data) ->
-        compile.compileStatic cache_key, data.val(), (error, content) ->
-          console.log "aaaaa", error, content
-          client.set cache_key, content
+        res.send '404 not exist' unless data
+        compile.compileStatic data.val(), (error, content) ->
+          client.set content.name, content
           res.send content.toString()
     else
       res.send result.toString()
 
 exports.save = (req, res) ->
   logger.info "Received #{req.protocol} GET for #{req.url} from #{req.ip}"
-  firebase.child(req.params.page_name).set {key: req.params.page_name, content: req.params.content, owner: 1234}, (error) ->
-    console.log "pushed" unless error
-    res.send {error: error}
+  data =
+    name: 'user1'      
+    theme: 'dev'
+    bricks: [{
+      type: 'meta'
+      content:
+        name: 'Chemix'
+        tagline: 'I am chemix'
+        description: 'lorem ipsum'
+        photo: 'http://blog.lafraise.com/fr/wp-content/uploads/2009/10/Chemix.jpg'
+    }, {
+      type: 'markdown'
+      content:
+        source: 'Markdown will be here probably'
+    }, {
+      type: 'image'
+      content:
+        image: 'http://blog.lafraise.com/fr/wp-content/uploads/2009/10/Chemix.jpg'
+        alt: 'Chemix'
+        description: 'some markdown, optional'
+    }]
+  firebase.child(req.params.page_name).set data, (error) ->
+    console.log "error push", error if error
+    res.json error
