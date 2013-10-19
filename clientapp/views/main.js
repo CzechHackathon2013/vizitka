@@ -32,10 +32,16 @@ module.exports = HumanView.extend({
       });
 
       // main renderer
-      this.renderAndBind({me: me});
+      this.renderAndBind({user: app.user});
 
       // setting a favicon for fun (note, it's dyanamic)
       setFavicon('/images/ampersand.png');
+
+      // subscribe to events
+      app.on('login', function(user) {
+        console.log('on login');
+      });
+
       return this;
     },
 

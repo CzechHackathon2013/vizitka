@@ -28,13 +28,13 @@ module.exports = HumanModel.define({
         }
     },
   login: function() {
-    // var Firebase = require('firebase'); we add firebase from script tag ...
     var firebaseEndpoint = new window.Firebase(app.config['firebase']['endpoint']);
 
     var auth = new window.FirebaseSimpleLogin(firebaseEndpoint, _.bind(function(error, user) {
-      console.log('simple login error:', error);
       if (!error) {
         this.loginToken = 'xxx'; // TODO: get from user
+        console.log('user', user);
+        app.trigger('login', this);
         app.navigate('/');
       } else {
         this.loginError = error;

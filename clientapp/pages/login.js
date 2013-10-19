@@ -10,7 +10,8 @@ module.exports = PageView.extend({
   render: function () {
     this.renderAndBind();
   },
+  // TODO: on enter - if logged in, return to last page or home
   login: function() {
-    this.model.login();
+    app.user.login();
   }
 });

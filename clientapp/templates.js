@@ -12,7 +12,7 @@ exports.pages = {};
 exports.body = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<body><div class="container"><div class="navbar"><div class="navbar-inner"><a href="#" class="brand">AwesomeApp</a><ul class="nav"><li><a href="/">home</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li></ul></div></div><main id="pages"></main></div></body>');
+        buf.push('<body><header class="navbar navbar-default"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle"><a href="#" class="navbar-brand">AwesomeApp</a></button></div><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/login">log in</a></li></ul></div></header><div class="container"><main id="pages"></main></div></body>');
     }
     return buf.join("");
 };
@@ -66,7 +66,7 @@ exports.pages.info = function anonymous(locals) {
 exports.pages.login = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<section class="page home"><h2>Log in</h2><p><a class="login">Log in with facebook</a></p></section>');
+        buf.push('<section class="page home"><h2>Log in</h2><p><a class="login btn btn-primary">Log in with facebook</a></p></section>');
     }
     return buf.join("");
 };

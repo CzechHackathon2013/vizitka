@@ -17,26 +17,26 @@ module.exports = Backbone.Router.extend({
     // ------- ROUTE HANDLERS ---------
     login: function () {
         app.renderPage(new LoginPage({
-          model: me
+          model: null
         }));
     },
 
     home: function () {
         app.renderPage(new HomePage({
-            model: me
+            model: null
         }));
     },
 
     collectionDemo: function () {
         app.renderPage(new CollectionDemo({
-            model: me,
+            model: null,
             collection: app.people
         }));
     },
 
     info: function () {
         app.renderPage(new InfoPage({
-            model: me
+            model: null
         }));
     }
 });

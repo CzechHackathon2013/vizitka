@@ -2,6 +2,8 @@ express        = require 'express'
 expressWinston = require 'express-winston'
 cons           = require 'consolidate'
 swig           = require 'swig'
+stylus         = require 'stylus'
+fs             = require 'fs'
 Moonboots      = require 'moonboots'
 templatizer    = require 'templatizer'
 getconfig      = require 'getconfig'
@@ -51,6 +53,16 @@ clientApp = new Moonboots(
     # , __dirname + "/clientapp/libraries/firebase.js"
   ]
   stylesheets: [ __dirname + "/public/css/bootstrap.css",  __dirname + "/public/css/app.css" ]
+  beforeBuildCSS: (done) ->
+    inputFile = __dirname + '/public/css/app.styl'
+    outputFile = __dirname + '/public/css/app.css'
+    stylus.render fs.readFileSync(inputFile, {encoding: 'utf-8'}), { filename: inputFile }, (err, css) ->
+      if err
+        console.log 'Error compiling stylus: ', err
+      else
+        console.log 'Stylus compiled.'
+        fs.writeFileSync(outputFile, css)
+      done()
   browserify:
     debug: false #process.env.NODE_ENV == "development"
   server: app
@@ -72,7 +84,7 @@ app.put '/api/people/:id', api.update
 app.post '/api/people', api.add
 
 # Routes
-app.get '/', routes.index
+# app.get '/', routes.index
 app.get '/compile', compile.tpl
 
 app.get '/pages/:page_name', pages.show

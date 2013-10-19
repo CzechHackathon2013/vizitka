@@ -8,7 +8,7 @@ var config = require('clientconfig');
 var Router = require('./router');
 var tracking = require('./helpers/metrics');
 var MainView = require('./views/main');
-var Me = require('./models/me');
+var User = require('./models/user');
 var People = require('./models/people');
 
 var externalScripts = [
@@ -28,7 +28,7 @@ module.exports = {
         this.config = config;
         this.externalScripts = externalScripts;
 
-        this.me = window.me = new Me();
+        this.user = window.user = new User();
         this.people = new People();
 
         // init our URL handlers and the history tracker
@@ -40,7 +40,7 @@ module.exports = {
         $(function () {
             // init our main view
             self.view = new MainView({
-                model: me,
+                model: null,
                 el: document.body
             });
             self.view.render();
