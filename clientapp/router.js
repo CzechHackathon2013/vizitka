@@ -6,40 +6,26 @@ var EditPage = require('./pages/edit');
 
 
 module.exports = Backbone.Router.extend({
-    routes: {
-        '': 'home',
-        // 'login': 'login',
-        // 'collections': 'collectionDemo',
-        // 'info': 'info'
-    },
+  routes: {
+    '': 'home',
+    // 'login': 'login',
+    // 'collections': 'collectionDemo',
+    // 'info': 'info'
+  },
 
-    // ------- ROUTE HANDLERS ---------
-    /*
-    login: function () {
-        app.renderPage(new LoginPage({
-          model: null
-        }));
-    },
-    */
+  // ------- ROUTE HANDLERS ---------
 
-    home: function () {
-        app.renderPage(new HomePage({
-            model: null
-        }));
-    },
+  home: function () {
+    app.renderPage(new HomePage({
+      model: null
+    }));
+  },
 
-    /*
-    collectionDemo: function () {
-        app.renderPage(new CollectionDemo({
-            model: null,
-            collection: app.people
-        }));
-    },
-    */
-
-    edit: function () {
-        app.renderPage(new EditPage({
-            model: null
-        }));
-    }
+  /*
+   edit: function () {
+   app.renderPage(new EditPage({
+   model: null
+   }));
+   }
+   */
 });

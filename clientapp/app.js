@@ -9,7 +9,6 @@ var Router = require('./router');
 var tracking = require('./helpers/metrics');
 var MainView = require('./views/main');
 var User = require('./models/user');
-var People = require('./models/people');
 
 var externalScripts = [
   'https://cdn.firebase.com/v0/firebase.js',
@@ -17,67 +16,66 @@ var externalScripts = [
 ];
 
 module.exports = {
-    // this is the the whole app initter
-    blastoff: function () {
-        // add the ability to bind/unbind/trigger events
-        // to the main app object.
-        _.extend(this, Backbone.Events);
+  // this is the the whole app initter
+  blastoff: function () {
+    // add the ability to bind/unbind/trigger events
+    // to the main app object.
+    _.extend(this, Backbone.Events);
 
-        var self = window.app = this;
+    var self = window.app = this;
 
-        this.config = config;
-        this.externalScripts = externalScripts;
+    this.config = config;
+    this.externalScripts = externalScripts;
 
-        this.user = window.user = new User();
-        this.people = new People();
+    this.user = window.user = new User();
 
-        // init our URL handlers and the history tracker
-        this.router = new Router();
-        this.history = Backbone.history;
+    // init our URL handlers and the history tracker
+    this.router = new Router();
+    this.history = Backbone.history;
 
-        // wait for document ready to render our main view
-        // this ensures the document has a body, etc.
-        $(function () {
-            // init our main view
-            self.view = new MainView({
-                model: null,
-                el: document.body
-            });
-            self.view.render();
-            // we have what we need, we can now start our router and show the appropriate page
-            self.history.start({pushState: true, root: '/'});
-        });
-    },
+    // wait for document ready to render our main view
+    // this ensures the document has a body, etc.
+    $(function () {
+      // init our main view
+      self.view = new MainView({
+        model: null,
+        el: document.body
+      });
+      self.view.render();
+      // we have what we need, we can now start our router and show the appropriate page
+      self.history.start({pushState: true, root: '/'});
+    });
+  },
 
-    // This is how you navigate around the app.
-    // this gets called by a global click handler that handles
-    // all the <a> tags in the app.
-    // it expects a url without a leading slash.
-    // for example: "costello/settings".
-    navigate: function (page) {
-        var url = (page.charAt(0) === '/') ? page.slice(1) : page;
-        app.history.navigate(url, true);
-    },
+  // This is how you navigate around the app.
+  // this gets called by a global click handler that handles
+  // all the <a> tags in the app.
+  // it expects a url without a leading slash.
+  // for example: "costello/settings".
+  navigate: function (page) {
+    var url = (page.charAt(0) === '/') ? page.slice(1) : page;
+    app.history.navigate(url, true);
+  },
 
-    // this is what handles all the page rendering and
-    // setting the correct page indicator etc.
-    // It's done at this so that views don't have to worry
-    // about their page position.
-    // It simply matches urls to figure out which item should
-    // be 'active'.
-    renderPage: function (view, animation) {
-        var container = $('#pages');
+  // this is what handles all the page rendering and
+  // setting the correct page indicator etc.
+  // It's done at this so that views don't have to worry
+  // about their page position.
+  // It simply matches urls to figure out which item should
+  // be 'active'.
+  renderPage: function (view, animation) {
+    var container = $('#pages');
 
-        if (app.currentPage) {
-            app.currentPage.hide();
-            app.trigger('pageunloaded', app.currentPage);
-        }
-
-        app.currentPage = view;
-
-        // we call show
-        container.append(view.show().el);
+    if (app.currentPage) {
+      app.currentPage.hide();
+      app.trigger('pageunloaded', app.currentPage);
     }
+
+    app.currentPage = view;
+
+    // we call show
+    container.append(view.show().el);
+  }
 };
 
 // run it

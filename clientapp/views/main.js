@@ -11,7 +11,6 @@ var setFavicon = require('favicon-setter');
 var cssUtils = require('../helpers/cssUtils');
 
 
-
 module.exports = HumanView.extend({
   template: templates.body,
   initialize: function () {
