@@ -2,11 +2,14 @@ logger         = require('../lib/logging').getLogger "default"
 memcache			 = require('memcache')
 crypto				 = require('crypto')
 
-client = new memcache.Client(11211, 'localhost');
+client = new memcache.Client(11211, 'localhost')
 client.connect()
 
 client.on 'connect', ->
   logger.info "connected to memcache"
+
+client.on 'error', (e) ->
+	logger.info "memcache connection error"
 
 exports.show = (req, res) ->
   logger.info "Received #{req.protocol} GET for #{req.url} from #{req.ip}"
