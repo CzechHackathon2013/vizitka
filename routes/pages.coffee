@@ -54,8 +54,8 @@ exports.save = (req, res) ->
         alt: 'Chemix'
         description: 'some markdown, optional'
     }]
-  new Firebase(getconfig['client']['firebase']['endpoint'] + "pages/" + req.params.page_name).on 'value', (data) ->
-    if data.val()
+  new Firebase(getconfig['client']['firebase']['endpoint'] + "pages/" + req.params.page_name).on 'value', (check_data) ->
+    if check_data.val()
       res.send 'name already taken'
     else
       firebase.child('users').child(req.params.user_id).child(req.params.page_name).set data, (error) ->
