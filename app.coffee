@@ -8,7 +8,7 @@ logging        = require './lib/logging'
 compile        = require './lib/compile'
 
 routes         = require './routes/index'
-#pages          = require './routes/pages'
+pages          = require './routes/pages'
 
 # Init
 logger = logging.getLogger "default"

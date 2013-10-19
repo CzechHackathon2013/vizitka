@@ -15,3 +15,9 @@ exports.tpl = (req, res) ->
     console.error html
 
     res.send html
+
+exports.compileStatic = (key, cb) ->
+  swig.compileFile __dirname + '/../views/card-data.html', {}, (err, tpl) ->
+    cb err, null if err
+    html = tpl { myname: "Pepa" }
+    cb err, html
