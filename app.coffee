@@ -4,7 +4,8 @@ expressWinston = require 'express-winston'
 config         = require './lib/config'
 logging        = require './lib/logging'
 
-routes         = require './routes/'
+routes         = require './routes/index'
+pages          = require './routes/pages'
 
 # Init
 logger = logging.getLogger "default"
@@ -29,6 +30,8 @@ app.configure 'production', () ->
 
 # Routes
 app.get '/', routes.index
+
+app.get '/pages', pages.index
 
 # Error debug - here we cause an error in the pipeline so we see express-winston in action
 app.get '/error', (req, res, next) ->

@@ -8,7 +8,7 @@ For development on your local machine, take the following steps:
 * add the following to `/etc/hosts`
 
     127.0.0.1       vizitka.local
-
+* install and start memcached `brew install memcached` to store rendered pages
 * in shell, type:
   - `cake init` to update all dependencies
   - `cake develop` and server is running at [vizitka.local:9200](http://vizitka.local:9200) as you edit your the code, the localhost server will automatically restart if your files change
