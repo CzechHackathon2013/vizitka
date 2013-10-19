@@ -1,3 +1,9 @@
+.base-view {
+  display: none;
+}
+.base-view.visible {
+  display: block;
+}
 .navbar-default {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;

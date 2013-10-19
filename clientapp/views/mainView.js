@@ -1,9 +1,9 @@
 /*global app, me, $*/
 // This app view is responsible for rendering all content that goes into
-// <html>. It's initted right away and renders iteslf on DOM ready.
+// <html>. It's initted right away and renders itself on DOM ready.
 
 // This view also handles all the 'document' level events such as keyboard shortcuts.
-var HumanView = require('human-view');
+var BaseView = require('./BaseView');
 var _ = require('underscore');
 var templates = require('../templates');
 var tracking = require('../helpers/metrics');
@@ -11,7 +11,7 @@ var setFavicon = require('favicon-setter');
 var cssUtils = require('../helpers/cssUtils');
 
 
-module.exports = HumanView.extend({
+module.exports = BaseView.extend({
   template: templates.body,
   initialize: function () {
     // this marks the correct nav item selected
@@ -41,10 +41,10 @@ module.exports = HumanView.extend({
     setFavicon('/images/ampersand.png');
 
     // save sub items
-    this.$login = $(this.el).find('.login');
-    this.$logout = $(this.el).find('.logout');
-    this.$logoutName = $(this.el).find('.logout .name');
-    this.$error = $(this.el).find('.alert');
+    this.$login = this.$('.login');
+    this.$logout = this.$('.logout');
+    this.$logoutName = this.$('.logout .name');
+    this.$error = this.$('.alert');
 
     // listen
     this.listenToAndRun(app, 'login logout', _.bind(function () {

@@ -3,6 +3,11 @@
 @import '../_variables'
 @import '../_mixins'
 
+.base-view
+  display none
+  &.visible
+    display: block
+
 .navbar-default
   roundall(0)
   border-left none

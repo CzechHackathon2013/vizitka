@@ -1,8 +1,6 @@
 /*global app, me, $*/
 var Backbone = require('backbone');
-var HomePage = require('./pages/home');
-// var CollectionDemo = require('./pages/collectionDemo');
-var EditPage = require('./pages/edit');
+var HomePage = require('./pages/homePage');
 
 
 module.exports = Backbone.Router.extend({

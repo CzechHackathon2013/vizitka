@@ -7,7 +7,7 @@ var config = require('clientconfig');
 
 var Router = require('./router');
 var tracking = require('./helpers/metrics');
-var MainView = require('./views/main');
+var MainView = require('./views/MainView');
 var User = require('./models/user');
 
 var externalScripts = [

@@ -1,30 +1,19 @@
 /*global $*/
 // base view for pages
 var HumanView = require('human-view');
+var BaseView = require('../views/BaseView');
 var _ = require('underscore');
 //var key = require('keymaster');
 
 
-module.exports = HumanView.extend({
+module.exports = BaseView.extend({
+  /*
   render: function () {
     this.renderAndBind();
 
     return this;
   },
-  // register keyboard handlers
-  registerKeyboardShortcuts: function () {
-    /*
-     var self = this;
-     _.each(this.keyboardShortcuts, function (value, k) {
-     // register key handler scoped to this page
-     key(k, self.cid, _.bind(self[value], self));
-     });
-     key.setScope(this.cid);
-     */
-  },
-  unregisterKeyboardShortcuts: function () {
-    //key.deleteScope(this.cid);
-  },
+  */
   show: function (animation) {
     var self = this;
 
@@ -45,19 +34,18 @@ module.exports = HumanView.extend({
 
     // if there's a data method, call it with a callback
     if (this.data) {
-      this.data(function () {
-        self.trigger('pagedataloaded');
-      });
+      this.data(_.bind(function () {
+        this.trigger('pagedataloaded');
+      }, this));
     }
 
-    // set the class so it comes into view
-    this.$el.addClass('active');
+    BaseView.prototype.show.apply(this, arguments);
 
     // set the document title
-    document.title = function () {
-      var title = _.result(self, 'title');
+    document.title = _.bind(function () {
+      var title = _.result(this, 'title');
       return title ? title + ' • humanjs' : 'humanjs';
-    }();
+    },this)();
 
     // trigger an event to the page model in case we want to respond
     this.trigger('pageloaded');
@@ -65,11 +53,12 @@ module.exports = HumanView.extend({
     return this;
   },
   hide: function () {
-    var self = this;
-    // hide the page
     this.$el.removeClass('active');
-    // tell the model we're bailing
+
+    BaseView.prototype.hide.apply(this, arguments);
+
     this.trigger('pageunloaded');
+
     // if it's cached just detach it
     if (this.cache) {
       // hide the page
@@ -79,6 +68,7 @@ module.exports = HumanView.extend({
       // unbind all events bound for this view
       this.animateRemove();
     }
+
     // unbind page-specific keyboard shortcuts
     //this.unregisterKeyboardShortcuts();
     return this;
