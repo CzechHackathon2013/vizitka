@@ -18,3 +18,5 @@ node_modules/
 nil.coffee
 
 *.sublime-*
+
+clientapp/templates.js
