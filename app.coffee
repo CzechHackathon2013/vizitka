@@ -100,6 +100,7 @@ app.get "*", clientSettingsMiddleware, clientApp.html()
 app.listen process.env.PORT, () ->
   logger.info "Listening at port: #{process.env.PORT}"
 
+###
 rune = require './clientapp/libraries/rune/rune.js'
 brickCfg =
   type: 'meta'
@@ -110,3 +111,4 @@ brickCfg =
     photo: 'http://blog.lafraise.com/fr/wp-content/uploads/2009/10/Chemix.jpg'
 rune.renderBrick brickCfg, "cardolin", (err, html) ->
   console.error "chemix: ", err, html
+###
