@@ -1,6 +1,5 @@
 logger         = require('../lib/logging').getLogger "default"
 memjs			     = require('memjs')
-#crypto				 = require('crypto')
 getconfig         = require 'getconfig'
 Firebase       = require('firebase')
 
@@ -8,25 +7,25 @@ config         = require '../lib/config'
 compile         = require '../lib/compile'
 
 client = new memjs.Client.create()
-firebase = new Firebase(getconfig['client']['firebase']['endpoint'] + "pages/")
+firebase = new Firebase(getconfig['client']['firebase']['endpoint'])
 
 firebase.on 'value', (snapshot) ->
   console.log 'data updated over firebase', snapshot.val()
 
 exports.show = (req, res) ->
   logger.info "Received #{req.protocol} GET for #{req.url} from #{req.ip}"
-#  key_hash = crypto.createHash('sha1')
   cache_key = req.params.page_name
   client.get cache_key, (error, result) ->
     if !result
-      firebase_record = new Firebase(getconfig['client']['firebase']['endpoint'] + "pages/" + cache_key)
-      firebase_record.on 'value', (data) ->
-        res.send '404 not exist' unless data.val()
-        compile.compileStatic data.val(), (error, content) ->
-          console.log data.val()
-          console.log error, content
-          client.set data.val().name, content
-          res.send content.toString()
+      firebase_ref_record = new Firebase(getconfig['client']['firebase']['endpoint'] + "pages/" + cache_key)
+      firebase_ref_record.on 'value', (ref_data) ->
+        res.send '404 not exist' unless ref_data.val()
+        firebase_record = new Firebase(getconfig['client']['firebase']['endpoint'] + "users/" + ref_data.val().user_id + "/" + cache_key)
+        firebase_record.on 'value', (data) ->
+          res.send '500 error' unless data.val()
+          compile.compileStatic data.val(), (error, content) ->
+            client.set data.val().name, content
+            res.send content.toString()
     else
       res.send result.toString()
 
@@ -53,6 +52,9 @@ exports.save = (req, res) ->
         alt: 'Chemix'
         description: 'some markdown, optional'
     }]
-  firebase.child(req.params.page_name).set data, (error) ->
+  firebase.child('users').child(req.params.user_id).child(req.params.page_name).set data, (error) ->
     console.log "error push", error if error
-    res.json error
+    firebase.child('pages').child(req.params.page_name).set {user_id: req.params.user_id}, (error) ->
+      console.log "error push ref", error if error
+      res.json error
+

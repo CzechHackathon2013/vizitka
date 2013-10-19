@@ -89,7 +89,7 @@ app.post '/api/people', api.add
 app.get '/compile', compile.tpl
 
 app.get '/pages/:page_name', pages.show
-app.get '/create/:page_name', pages.save
+app.get '/create/:user_id/:page_name', pages.save
 
 # Error debug - here we cause an error in the pipeline so we see express-winston in action
 app.get '/error', (req, res, next) ->
