@@ -15,7 +15,7 @@ exports.themes.dev = {};
 exports.body = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<body><header class="navbar navbar-default"><div class="container"><div class="navbar-header"><a href="#" class="navbar-brand">AwesomeApp</a></div><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/login">log in</a></li></ul></div></header><div class="container"><main id="pages"></main></div></body>');
+        buf.push('<body><header class="navbar navbar-default"><div class="container"><div class="navbar-header"><a href="#" class="navbar-brand">AwesomeApp</a></div><ul class="nav navbar-nav navbar-right"><!-- li<a href="/">home</a>--><!-- li<a href="/collections">collection demo</a>--><!-- li<a href="/info">more info</a>--><li class="login"><button type="button" class="btn btn-primary navbar-btn">log in with facebook</button></li><li class="logout hidden"><p class="name navbar-text"></p><button type="button" class="btn navbar-btn">log out</button></li></ul></div></header><div class="container"><main id="pages"></main></div></body>');
     }
     return buf.join("");
 };
@@ -47,29 +47,20 @@ exports.pages.collectionDemo = function anonymous(locals) {
     return buf.join("");
 };
 
+// edit.jade compiled template
+exports.pages.edit = function anonymous(locals) {
+    var buf = [];
+    with (locals || {}) {
+        buf.push('<section class="page pageEdit"><h2>TODO: edit</h2></section>');
+    }
+    return buf.join("");
+};
+
 // home.jade compiled template
 exports.pages.home = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
         buf.push('<section class="page home"><h2>Welcome to a skeleton for AwesomeApp</h2><p>If you "view source" you\'ll see it\'s 100% client rendered.</p><p>Click around the site using the nav bar at the top. </p><p>Things to note:<ul><li>The url changes, no requests are made to the server.</li><li>Refreshing the page will always get you back to the same page</li><li>Page changes are nearly instantaneous</li><li>In development mode, you don\'t need to restart the server to see changes, just edit and refresh.</li><li>In production mode, it will serve minfied, uniquely named files with super agressive cache headers. To test:<ul> <li>in dev_config.json set <code>isDev</code> to <code>false</code>.</li><li>restart the server.</li><li>view source and you\'ll see minified css and js files with unique names.</li><li>open the "network" tab in chrome dev tools (or something similar). You\'ll also want to make sure you haven\'t disabled your cache.</li><li>without hitting "refresh" load the app again (selecting current URL in url bar and hitting "enter" works great).</li><li>you should now see that the JS and CSS files were both served from cache without making any request to the server at all.</li></ul></li></ul></p></section>');
-    }
-    return buf.join("");
-};
-
-// info.jade compiled template
-exports.pages.info = function anonymous(locals) {
-    var buf = [];
-    with (locals || {}) {
-        buf.push('<section class="page pageTwo"><h2>More Info</h2><p>This is a demo app by <a href="http://twitter.com">Henrik Joreteg</a>.</p><h4>Relevant links:</h4><ul><li> <a href="http://humanjavascript.com">human javascript</a> &mdash; the book</li><li> <a href="https://github.com/HenrikJoreteg/humanjs-sample-app">github repo </a> &mdash; for this app</li><li> <a href="http://andyet.com">&yet</a> &mdash; The company behind this effort.</li></ul><h4>Finding Packages</h4><ul><li><a href="http://projects.joreteg.com/humanjs-resources/">humanjs resources</a> &mdash; A few curated modules with a quick search</li><li><a href="https://github.com/component">Component </a> &mdash; Lots of tools here in tiny modules. Most are on npm as {{name}}-component</li><li><a href="http://browserify.org/search">Browserify module search</a> &mdash; Searches npm for browserify packages</li></ul><h4>Apps Built this way</h4><ul><li> <a href="http://andbang.com">And Bang</a> &mdash; Team same-pagification tool. Realtime chat + task management</li><li> <a href="http://talky.io">Talky </a> &mdash; Free, zero-setup, no-account, peer-to-peer encrypted video calls</li></ul></section>');
-    }
-    return buf.join("");
-};
-
-// login.jade compiled template
-exports.pages.login = function anonymous(locals) {
-    var buf = [];
-    with (locals || {}) {
-        buf.push('<section class="page home"><h2>Log in</h2><div class="alert alert-danger hidden"></div><p><a class="login btn btn-primary">Log in with facebook</a></p></section>');
     }
     return buf.join("");
 };

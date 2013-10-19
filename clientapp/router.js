@@ -1,25 +1,26 @@
 /*global app, me, $*/
 var Backbone = require('backbone');
 var HomePage = require('./pages/home');
-var LoginPage = require('./pages/login');
-var CollectionDemo = require('./pages/collectionDemo');
-var InfoPage = require('./pages/info');
+// var CollectionDemo = require('./pages/collectionDemo');
+var EditPage = require('./pages/edit');
 
 
 module.exports = Backbone.Router.extend({
     routes: {
         '': 'home',
-        'login': 'login',
-        'collections': 'collectionDemo',
-        'info': 'info'
+        // 'login': 'login',
+        // 'collections': 'collectionDemo',
+        // 'info': 'info'
     },
 
     // ------- ROUTE HANDLERS ---------
+    /*
     login: function () {
         app.renderPage(new LoginPage({
           model: null
         }));
     },
+    */
 
     home: function () {
         app.renderPage(new HomePage({
@@ -27,15 +28,17 @@ module.exports = Backbone.Router.extend({
         }));
     },
 
+    /*
     collectionDemo: function () {
         app.renderPage(new CollectionDemo({
             model: null,
             collection: app.people
         }));
     },
+    */
 
-    info: function () {
-        app.renderPage(new InfoPage({
+    edit: function () {
+        app.renderPage(new EditPage({
             model: null
         }));
     }

@@ -6,17 +6,11 @@ var _ = require('underscore');
 
 
 module.exports = HumanView.extend({
-  /*
-  events: {
-    'click .login': 'login'
-  },
   render: function () {
     this.renderAndBind();
+
+    return this;
   },
-  login: function() {
-    this.model.login();
-  },
-  */
   // register keyboard handlers
   registerKeyboardShortcuts: function () {
     /*

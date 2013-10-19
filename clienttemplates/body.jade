@@ -3,15 +3,18 @@ body
     .container
       .navbar-header
         a.navbar-brand(href="#") AwesomeApp
-      ul.nav.navbar-nav
-        li
+      ul.nav.navbar-nav.navbar-right
+        // li
           a(href="/") home
-        li
+        // li
           a(href="/collections") collection demo
-        li
+        // li
           a(href="/info") more info
-        li
-          a(href="/login") log in
+        li.login
+          button.btn.btn-primary.navbar-btn(type='button') log in with facebook
+        li.logout.hidden
+          p.name.navbar-text
+          button.btn.navbar-btn(type='button') log out
 
   .container
     main#pages
