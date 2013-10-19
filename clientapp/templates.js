@@ -15,7 +15,7 @@ exports.themes.dev = {};
 exports.body = function anonymous(locals) {
     var buf = [];
     with (locals || {}) {
-        buf.push('<body><header class="navbar navbar-default"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle"><a href="#" class="navbar-brand">AwesomeApp</a></button></div><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/login">log in</a></li></ul></div></header><div class="container"><main id="pages"></main></div></body>');
+        buf.push('<body><header class="navbar navbar-default"><div class="container"><div class="navbar-header"><a href="#" class="navbar-brand">AwesomeApp</a></div><ul class="nav navbar-nav"><li><a href="/">home</a></li><li><a href="/collections">collection demo</a></li><li><a href="/info">more info</a></li><li><a href="/login">log in</a></li></ul></div></header><div class="container"><main id="pages"></main></div></body>');
     }
     return buf.join("");
 };
