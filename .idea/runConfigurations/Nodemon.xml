@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Nodemon" type="NodeJSConfigurationType" factoryName="Node.js" singleton="true" path-to-node="$USER_HOME$/AppData/Roaming/npm/nodemon.cmd" path-to-js-file="app.coffee" node-parameters="--watch app.coffee --watch lib --watch routes" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="Nodemon" type="NodeJSConfigurationType" factoryName="Node.js" singleton="true" path-to-node="$PROJECT_DIR$/node_modules/.bin/nodemon.cmd" path-to-js-file="app.coffee" node-parameters="--watch app.coffee --watch lib --watch routes" working-dir="$PROJECT_DIR$">
     <RunnerSettings RunnerId="NodeJS.debug" />
     <RunnerSettings RunnerId="NodeJS.run" />
     <ConfigurationWrapper RunnerId="NodeJS.debug" />
