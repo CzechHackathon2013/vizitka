@@ -68,10 +68,6 @@ app.delete '/api/people/:id', api.delete
 app.put '/api/people/:id', api.update
 app.post '/api/people', api.add
 
-
-# configure our main route that will serve our moonboots app
-app.get "*", clientSettingsMiddleware, clientApp.html()
-
 # Routes
 app.get '/', routes.index
 
@@ -82,8 +78,8 @@ app.post '/pages/:page_name/:content', pages.save
 app.get '/error', (req, res, next) ->
   return next new Error "This is an error and it should be logged to the console"
 
-# redirect all others to the index (HTML5 history)
-app.get '*', routes.index
+# configure our main route that will serve our moonboots app
+app.get "*", clientSettingsMiddleware, clientApp.html()
 
 # Start server
 app.listen process.env.PORT, () ->

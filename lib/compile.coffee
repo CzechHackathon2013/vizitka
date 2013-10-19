@@ -18,7 +18,6 @@ exports.tpl = (req, res) ->
 
     res.send html
 
-
 exports.compileStatic = (key, cb) ->
   data =
     meta:
@@ -56,8 +55,8 @@ exports.compileStatic = (key, cb) ->
   rune.renderPage data, pageContext, cb
 
 
-exports.compileOld = (key, cb) ->
+exports.compileStatic_old = (key, data, cb) ->
   swig.compileFile __dirname + '/../views/card-data.html', {}, (err, tpl) ->
     cb err, null if err
-    html = tpl { myname: key }
+    html = tpl { myname: key, mycontent: data.content }
     cb err, html
