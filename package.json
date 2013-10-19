@@ -21,6 +21,7 @@
     "consolidate": "",
     "swig": "",
     "memcache": "",
+    "memjs": "",
 
     "andlog": "0.0.4",
     "backbone": "1.0.0",

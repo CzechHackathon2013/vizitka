@@ -1,15 +1,10 @@
 logger         = require('../lib/logging').getLogger "default"
-memcache			 = require('memcache')
+memjs			     = require('memjs')
 crypto				 = require('crypto')
 
-client = new memcache.Client(11211, 'localhost')
-client.connect()
+config         = require '../lib/config'
 
-client.on 'connect', ->
-  logger.info "connected to memcache"
-
-client.on 'error', (e) ->
-	logger.info "memcache connection error"
+client = new memjs.Client.create()
 
 exports.show = (req, res) ->
   logger.info "Received #{req.protocol} GET for #{req.url} from #{req.ip}"
@@ -17,7 +12,9 @@ exports.show = (req, res) ->
   key_hash = crypto.createHash('sha1')
   cache_key = key_hash.update(req.params.name).digest('base64') #TODO: propably not needed
   client.get cache_key, (error, result) ->
+    console.log result
     if !result
       client.set cache_key, content
       result = content
-    res.send result
+    console.error result
+    res.send result.toString()
