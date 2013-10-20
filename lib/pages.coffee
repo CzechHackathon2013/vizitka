@@ -19,10 +19,14 @@ exports.show = (req, res) ->
     if !result
       firebase_ref_record = new Firebase(getconfig['client']['firebase']['endpoint'] + "pages/" + cache_key)
       firebase_ref_record.on 'value', (ref_data) ->
-        res.send '404 not exist' unless ref_data.val()
+        unless ref_data.val()
+          res.send 404, 'not exist'
+          return
         firebase_record = new Firebase(getconfig['client']['firebase']['endpoint'] + "users/" + ref_data.val().user_id + "/" + cache_key)
         firebase_record.on 'value', (data) ->
-          res.send '500 error' unless data.val()
+          unless data.val()
+           res.send '500 error'
+           return
           rune.renderPage data.val(), (error, content) ->
             console.log data.val()
             console.log error, content
