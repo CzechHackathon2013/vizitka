@@ -59,6 +59,13 @@ exports.save = (req, res) ->
         "source" : "Je to už nějaký ten pátek co jsem poprvé zmáčkl tlačítka start na svém počítači a začal zkoumat svět jedniček a nul."
       }
     }, {
+      "type" : "title",
+      "content" : {
+        "weight" : "high",
+        "title" : "Portfolio",
+        "subtitle" : "digital"
+      }
+    }, {
       "type" : "portfolio",
       "content" : {
         "role" : "frontend and backend developer",
@@ -68,6 +75,13 @@ exports.save = (req, res) ->
         "title" : "Shadowbox.cz",
         "alt" : "SHADOWBOX",
         "image" : "http://cdn.dropmark.com/31002/ff9e50c15fc1974e2a55267661df1549fe624f17/Screen%20Shot%202013-10-19%20at%2011.29.25%20PM.png"
+      }
+    }, {
+      "type" : "title",
+      "content" : {
+        "weight" : "high",
+        "title" : "Activity",
+        "subtitle" : "real life"
       }
     }, {
       "type" : "image",
