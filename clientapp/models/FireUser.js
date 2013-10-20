@@ -35,6 +35,8 @@ module.exports = HumanModel.define({
     this.firebaseUser = new window.Firebase(app.config['firebase']['endpoint'] + 'users/' + uid);
 
     this._valueChanged = _.bind(function(snapshot) {
+      console.log('VAL', snapshot.val());
+
       if(snapshot.val() === null) {
         this.pages.reset([]);
       } else {
@@ -45,11 +47,14 @@ module.exports = HumanModel.define({
          */
 
         var val = snapshot.val();
+
         this.pages.reset(utils.objKeys(val).map(_.bind(function(key) {
           var page = new FirePage();
           page.initWithKey(key);
           return page;
         }, this)));
+
+        console.log(this.pages);
       }
       this.isEmpty = (this.pages.length == 0);
     }, this);

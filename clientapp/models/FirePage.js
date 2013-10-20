@@ -17,7 +17,7 @@ module.exports = HumanModel.define({
   },
   derived: {
     jsonText: {
-      deps: ['json'],
+      deps: ['jsonSource'],
       cache: true,
       fn: function () {
         return utils.objectToJsonString(this.jsonSource);
@@ -31,7 +31,13 @@ module.exports = HumanModel.define({
       }
     }
   },
-
+  initialize: function() {
+    console.log('INITIALIAZLIZE');
+    this.on('change:key', _.bind(function() {
+      console.log('CHANGE KEY');
+      this.initWithKey(this.key);
+    }, this));
+  },
   initWithKey: function (key) {
     this.key = key;
 
@@ -41,6 +47,9 @@ module.exports = HumanModel.define({
 
     // TODO: listen on user and name changes
     this._valueChanged = _.bind(function(snapshot) {
+      // console.log('VALUE CHANGED!!', snapshot.val(), this);
+      this.name = snapshot.val()['name'];
+      this.theme = snapshot.val()['theme'];
       this.jsonSource = snapshot.val();
     }, this);
 

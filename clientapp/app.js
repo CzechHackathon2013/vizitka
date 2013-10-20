@@ -29,8 +29,6 @@ module.exports = {
     // to the main app object.
     _.extend(this, Backbone.Events);
 
-    console.log('ff', Backbone.Firebase);
-
     var self = window.app = this;
 
     this.config = config;

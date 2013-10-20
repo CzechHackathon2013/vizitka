@@ -17,15 +17,22 @@ module.exports = HumanView.extend({
     'keyup .edit-page': 'userEditedSource'
   },
   render: function () {
+    console.log('RENDER', this.model);
+    // debugger;
+
     this.renderAndBind();
 
     this.$textarea = this.$('.edit-page');
     this.$link = this.$('a.key');
 
+    var self = this; // TODO: why?
+
     // TODO: change, not *
     this.listenToAndRun(this.model, '*', _.bind(function () {
-      // console.log(this.model.key, this.model, this.model.bricks);
-      this.renderCollection(this.model.bricks, FireBrickView, this.$('.bricks')[0]);
+
+      console.log('MODEL UPDATE', self.model.jsonSource, self.model.jsonText);
+
+      // debugger;
 
       // update link
       this.$link.attr('href', this.model.pageUrl);
@@ -38,9 +45,12 @@ module.exports = HumanView.extend({
       t.value = this.model.jsonText;
       setInputSelection(t, sel.start, sel.end);
 
-      setTimeout(_.bind(function() {
+      // setTimeout(_.bind(function() {
         this.$textarea.focus();
-      }, this), 0);
+      // }, this), 0);
+
+      // console.log(this.model.key, this.model, this.model.bricks);
+      this.renderCollection(this.model.bricks, FireBrickView, this.$('.bricks')[0]);
 
 
     }, this));

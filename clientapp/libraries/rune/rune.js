@@ -22,7 +22,7 @@ marked.setOptions({
 exports.renderPage = function(content, callback) {
   content = unmarkPage(content);
   console.error(content);
-  // var filename = __dirname + '/../../../clienttemplates/themes/' + content.theme + '/index.jade';
+  var filename = __dirname + '/../../../clienttemplates/themes/' + content.theme + '/index.jade';
   var opt = { filename: content.theme + "/index", pretty: true, data: content };
   jade.renderFile(filename, opt, function (err, html) {
     callback(err, html);
