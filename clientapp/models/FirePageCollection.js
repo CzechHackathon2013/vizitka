@@ -1,4 +1,3 @@
-var Backfire = require('client-backfire');
 var Backbone = require('backbone');
 var FirePage = require('./FirePage');
 var _ = require('underscore');

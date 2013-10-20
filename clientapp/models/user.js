@@ -30,12 +30,12 @@ module.exports = HumanModel.define({
    */
   login: function () {
     var firebaseEndpoint = new window.Firebase(app.config['firebase']['endpoint']);
-    var auth = new window.FirebaseSimpleLogin(firebaseEndpoint, _.bind(function (error, user) {
+    var auth = new window.FirebaseSimpleLogin(firebaseEndpoint, _.bind(_.once(function (error, user) {
       if (user && !error) {
         this.loginError = undefined;
         this.firebaseUserConfig = user;
         this.firebaseUser = new FireUser();
-        this.firebaseUser.initWithUserId(user.id);
+        this.firebaseUser.initWithUid(user.uid);
 
         console.log('user', user);
 
@@ -51,7 +51,7 @@ module.exports = HumanModel.define({
         this.firebaseUserConfig = undefined;
         this.firebaseUser = undefined;
       }
-    }, this));
+    }), this));
     auth.login('facebook', {});
   },
   logout: function () {

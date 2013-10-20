@@ -7,20 +7,19 @@ module.exports = HumanView.extend({
   textBindings: {
     key: '.key'
   },
-  /*
-  srcBindings: {
-    'avatar': '.avatar'
+  classBindings: {
+    'active': ''
   },
   events: {
-    'click .delete': 'handleRemoveClick'
+    'click a': 'switchToPage'
   },
-  */
   render: function () {
     this.renderAndBind();
   },
-  /*
-  handleRemoveClick: function () {
-    this.model.destroy();
+  switchToPage: function () {
+    app.user.firebaseUser.pages.map(_.bind(function(page, i) {
+      page.active = (page == this.model);
+    }, this));
+    // app.navigate('/edit/' + this.model.key);
   }
-  */
 });

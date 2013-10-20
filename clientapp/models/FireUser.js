@@ -9,7 +9,7 @@ module.exports = HumanModel.define({
   type: 'fireUser',
   props: {
     firebaseUser: ['object', false, undefined],
-    userId: ['string', false, undefined],
+    uid: ['string', false, undefined],
     pages: ['object', true, new FirePageCollection()],
     isEmpty: ['boolean', true, true],
   },
@@ -25,16 +25,16 @@ module.exports = HumanModel.define({
      */
   },
   // eg. https://min-vizitka.firebaseio.com/users/659783637/chemix
-  initWithUserId: function(id) {
-    if (this.userId) {
+  initWithUid: function(uid) {
+    if (this.uid) {
       // remove old handlers
       this.stopListening();
     }
 
-    console.log('FireUser.initWithUserID', id);
+    console.log('FireUser.initWithUserID', uid);
 
-    this.userId = id;
-    this.firebaseUser = new window.Firebase(app.config['firebase']['endpoint'] + 'users/' + id);
+    this.uid = uid;
+    this.firebaseUser = new window.Firebase(app.config['firebase']['endpoint'] + 'users/' + uid);
 
     this._valueChanged = _.bind(function(snapshot) {
       if(snapshot.val() === null) {

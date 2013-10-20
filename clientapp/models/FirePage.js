@@ -6,6 +6,9 @@ module.exports = HumanModel.define({
   props: {
     key: ['string', false, undefined],
   },
+  session: {
+    active: ['boolean', true, false]
+  },
   initWithKey: function (key) {
     this.key = key;
   }
