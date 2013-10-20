@@ -44,7 +44,7 @@ module.exports = BaseView.extend({
     // set the document title
     document.title = _.bind(function () {
       var title = _.result(this, 'title');
-      return title ? title + ' • humanjs' : 'humanjs';
+      return title ? title + ' • cardolin' : 'cardolin';
     },this)();
 
     // trigger an event to the page model in case we want to respond
