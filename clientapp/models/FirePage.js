@@ -46,12 +46,8 @@ module.exports = HumanModel.define({
 
     this._firebasePage.on('value', this._valueChanged);
 
+    // TODO: bricks need to know about their parent
 
-    /*
-    this.bricks = new FireBrickCollection([], {
-      firebase: new window.Firebase( this._pageUrl + '/bricks' )
-    });
-    */
     this.bricks = new FireBrickCollection([], {
       firebase: new window.Firebase( this._pageUrl + '/bricks' )
     });

@@ -1,6 +1,7 @@
 var jade = require("jade");
 var marked = require("marked");
-var async = require("async");
+var templates = require("../../templates");
+// var async = require("async");
 
 marked.setOptions({
   gfm: true,
@@ -21,7 +22,7 @@ marked.setOptions({
 exports.renderPage = function(content, callback) {
   content = unmarkPage(content);
   console.error(content);
-  var filename = __dirname + '/../../../clienttemplates/themes/' + content.theme + '/index.jade';
+  // var filename = __dirname + '/../../../clienttemplates/themes/' + content.theme + '/index.jade';
   var opt = { filename: content.theme + "/index", pretty: true, data: content };
   jade.renderFile(filename, opt, function (err, html) {
     callback(err, html);
@@ -36,11 +37,22 @@ exports.renderPage = function(content, callback) {
  */
 exports.renderBrick = function(brickData, theme, callback) {
   brickData = unmarkBrick(brickData);
+  /*
   var filename = __dirname + '/../../../clienttemplates/themes/' + theme + '/' + brickData.type + '.jade';
   var opt = { filename: theme + '/' + brickData['type'], pretty: true, context: brickData.content };
+  */
+
+  try {
+    var html = templates.themes[theme][brickData.type]({context: brickData.content});
+    callback(undefined, html);
+  } catch (e) {
+    callback(e);
+  }
+  /*
   jade.renderFile(filename, opt, function (err, html) {
     callback(err, html);
   });
+*/
 };
 
 var unmarkPage = function(content){
