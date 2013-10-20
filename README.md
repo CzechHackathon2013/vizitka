@@ -6,7 +6,6 @@ For development on your local machine, take the following steps:
 * use nvm to install node and npm `nvm install 0.10`
 * install CoffeeScript `npm install -g coffee-script`
 * add the following to `/etc/hosts`
-
     127.0.0.1       vizitka.local
 * install and start memcached `brew install memcached` to store rendered pages
 * in shell, type:

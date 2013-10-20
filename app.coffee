@@ -1,7 +1,5 @@
 express        = require 'express'
 expressWinston = require 'express-winston'
-cons           = require 'consolidate'
-swig           = require 'swig'
 stylus         = require 'stylus'
 fs             = require 'fs'
 Moonboots      = require 'moonboots'
@@ -12,8 +10,7 @@ config         = require './lib/config'
 getconfig      = require 'getconfig'
 logging        = require './lib/logging'
 
-routes         = require './routes/index'
-pages          = require './routes/pages'
+pages          = require './lib/pages'
 
 
 # Init
@@ -22,10 +19,6 @@ app = express()
 
 # Configuraion
 app.configure () ->
-  app.engine 'html', cons.swig
-  app.set 'views', __dirname + '/views'
-  app.set 'view engine', 'html'
-  app.set 'view options', { layout: false }
   app.use express.favicon 'public/img/favicon.ico'
   app.use express.static __dirname + '/public'
   app.use express.compress()
@@ -83,15 +76,12 @@ app.delete '/api/people/:id', api.delete
 app.put '/api/people/:id', api.update
 app.post '/api/people', api.add
 
-# Routes
-# app.get '/', routes.index
-
 app.get '/pages/:page_name', pages.show
 app.post '/create/:user_id/:page_name', pages.save
 
 # Error debug - here we cause an error in the pipeline so we see express-winston in action
-app.get '/error', (req, res, next) ->
-  return next new Error "This is an error and it should be logged to the console"
+#app.get '/error', (req, res, next) ->
+#  return next new Error "This is an error and it should be logged to the console"
 
 # configure our main route that will serve our moonboots app
 app.get "*", clientSettingsMiddleware, clientApp.html()

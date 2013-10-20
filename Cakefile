@@ -28,7 +28,6 @@ task 'run', 'Run as a production version', ->
   run local_prod_env + './node_modules/.bin/coffee app.coffee'
 
 task 'develop', 'Run the dev version using nodemon, build public js files', ->
-  run './node_modules/.bin/coffee --compile --output public/js/ --watch assets/coffee/'
   run dev_environment + './node_modules/.bin/nodemon --watch app.coffee --watch lib --watch routes app.coffee'
 
 task 'debug', 'Run the debug version using nodemon', ->

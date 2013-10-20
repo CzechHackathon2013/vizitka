@@ -18,8 +18,6 @@
     "express-winston": "",
     "winston-papertrail": "",
     "async": "",
-    "consolidate": "",
-    "swig": "",
     "stylus": "",
     "memjs": "",
     "firebase": "",

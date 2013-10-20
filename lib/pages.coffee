@@ -1,7 +1,7 @@
 logger         = require('../lib/logging').getLogger "default"
-memjs			     = require('memjs')
-getconfig         = require 'getconfig'
-Firebase       = require('firebase')
+memjs			     = require 'memjs'
+getconfig      = require 'getconfig'
+Firebase       = require 'firebase'
 
 config         = require '../lib/config'
 rune           = require '../clientapp/libraries/rune/rune.js'
