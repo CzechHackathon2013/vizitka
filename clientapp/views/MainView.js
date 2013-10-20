@@ -18,7 +18,7 @@ module.exports = BaseView.extend({
     app.history.on('route', this.updateActiveNav, this);
   },
   events: {
-    'click a[href]': 'handleLinkClick',
+    'click header a[href]': 'handleLinkClick',
     'click .login button': 'login',
     'click button.login': 'login',
     'click .logout button': 'logout'

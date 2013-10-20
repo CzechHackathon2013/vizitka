@@ -22,6 +22,13 @@ module.exports = HumanModel.define({
       fn: function () {
         return utils.objectToJsonString(this.jsonSource);
       }
+    },
+    pageUrl: {
+      deps: ['key'],
+      cache: true,
+      fn: function () {
+        return "/pages/"+this.key;
+      }
     }
   },
 

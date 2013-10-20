@@ -19,12 +19,17 @@ module.exports = HumanView.extend({
     this.renderAndBind();
 
     this.$textarea = this.$('.edit-page');
+    this.$link = this.$('a.key');
 
     // TODO: change, not *
     this.listenToAndRun(this.model, '*', _.bind(function () {
       // console.log(this.model.key, this.model, this.model.bricks);
       this.renderCollection(this.model.bricks, FireBrickView, this.$('.bricks')[0]);
 
+      // update link
+      this.$link.attr('href', this.model.pageUrl);
+      this.$link.attr('target', '_blank');
+    
       // update textarea, keep cursor
       var t = this.$textarea[0];
       var sel = getInputSelection(t);
