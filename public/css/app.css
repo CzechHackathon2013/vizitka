@@ -15,3 +15,10 @@
   border-right: none;
   border-top: none;
 }
+.jumbotron img {
+  max-width: 100%;
+}
+textarea.edit-page {
+  width: 100%;
+  min-height: 20em;
+}
