@@ -103,7 +103,7 @@ module.exports = HumanModel.define({
         }
       ]
     };
-    var name = user.username.replace('.', '_');
+    var name = user.username.replace('/\./g', '_');
     var r = new Firebase(app.config['firebase']['endpoint'] + "pages/" + name).on('value', function(check_data) {
       if (check_data.val()) {
         console.log('name already taken', user, name);
