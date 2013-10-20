@@ -4,15 +4,15 @@
 @import '../_mixins'
 
 .base-view
-  display none
+  display: none
   &.visible
     display: block
 
 .navbar-default
   roundall(0)
-  border-left none
-  border-right none
-  border-top none
+  border-left: none
+  border-right: none
+  border-top: none
 
 .jumbotron img
   max-width: 100%
@@ -20,3 +20,7 @@
 textarea.edit-page
   width: 100%;
   min-height: 20em;
+
+.brick
+  .type, .contentJson
+    display: none

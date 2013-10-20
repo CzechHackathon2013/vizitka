@@ -22,3 +22,7 @@ textarea.edit-page {
   width: 100%;
   min-height: 20em;
 }
+.brick .type,
+.brick .contentJson {
+  display: none;
+}
