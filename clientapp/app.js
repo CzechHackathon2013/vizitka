@@ -6,6 +6,12 @@ var _ = require('underscore');
 var logger = require('andlog');
 var config = require('clientconfig');
 
+// hack: enhance backbone with firebase support
+// needs to go before people use it (in User)
+BackfireEnhance.enhanceBackbone(Backbone, window.Firebase, _);
+window.Backbone = Backbone;
+window._ = _;
+
 var Router = require('./router');
 var tracking = require('./helpers/metrics');
 var MainView = require('./views/MainView');
@@ -23,10 +29,7 @@ module.exports = {
     // to the main app object.
     _.extend(this, Backbone.Events);
 
-    // hack: enhance backbone with firebase support
-    BackfireEnhance.enhanceBackbone(Backbone, window.Firebase, _);
-    window.Backbone = Backbone;
-    window._ = _;
+    console.log('ff', Backbone.Firebase);
 
     var self = window.app = this;
 
