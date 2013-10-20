@@ -3,8 +3,10 @@
     <words>
       <w>clienttemplates</w>
       <w>firebase</w>
+      <w>jumbotron</w>
       <w>navbar</w>
       <w>pageunloaded</w>
+      <w>textarea</w>
     </words>
   </dictionary>
 </component>

@@ -20,21 +20,13 @@ module.exports = HumanModel.define({
   session: {
     // active: ['boolean', true, false]
   },
+  /*
   initWithUrlContentAndType: function (url, content, type) {
+    console.log('initWithUrlContentAndType', url, content, type);
+
     this._url = url;
     this.type = type;
     this.content = content;
-
-
-    this._firebasePage = new window.Firebase(this._pageUrl);
-
-    this.bricks= Backbone.Firebase.Collection.extend({
-      model: FireBrick,
-      firebase: this._pageUrl + '/bricks'
-    });
-
-
-
-
-    }
+  }
+  */
 });

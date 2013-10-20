@@ -20,6 +20,7 @@ module.exports = BaseView.extend({
   events: {
     'click a[href]': 'handleLinkClick',
     'click .login button': 'login',
+    'click button.login': 'login',
     'click .logout button': 'logout'
   },
   render: function () {
