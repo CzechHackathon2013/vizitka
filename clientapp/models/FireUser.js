@@ -31,8 +31,6 @@ module.exports = HumanModel.define({
       this.stopListening();
     }
 
-    console.log('FireUser.initWithUserID', uid);
-
     this.uid = uid;
     this.firebaseUser = new window.Firebase(app.config['firebase']['endpoint'] + 'users/' + uid);
 
