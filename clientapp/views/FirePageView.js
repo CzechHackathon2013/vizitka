@@ -1,4 +1,5 @@
 var HumanView = require('human-view');
+var _ = require('underscore');
 var templates = require('../templates');
 var FireBrickView = require('./FireBrickView');
 
@@ -36,7 +37,10 @@ module.exports = HumanView.extend({
       // this.$textarea.val(this.model.jsonText);
       t.value = this.model.jsonText;
       setInputSelection(t, sel.start, sel.end);
-      this.$textarea.focus();
+
+      setTimeout(_.bind(function() {
+        this.$textarea.focus();
+      }, this), 0);
 
 
     }, this));
