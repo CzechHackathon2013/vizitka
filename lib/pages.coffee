@@ -25,7 +25,7 @@ exports.show = (req, res) ->
         firebase_record = new Firebase(getconfig['client']['firebase']['endpoint'] + "users/" + ref_data.val().user_id + "/" + cache_key)
         firebase_record.on 'value', (data) ->
           unless data.val()
-           res.send '500 error'
+           res.send 500, '500 error'
            return
           rune.renderPage data.val(), (error, content) ->
             console.log data.val()
