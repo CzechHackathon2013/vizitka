@@ -7,9 +7,10 @@
     p= context.description
     p.contact
       a.email(href='mailto: context.email')= context.email
-      br
-      | mobile:
-      span.phone= context.phone
+      if context.phone
+        br
+        | mobile:
+        span.phone= context.phone
       br
       if context.linkedin
         a.linkedin(href=context.linkedin) LinkedIn

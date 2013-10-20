@@ -1,0 +1,7 @@
+.row.m-title
+  .large-12.columns
+    if context.weight == 'high'
+      h2
+        =context.title
+        if context.subtitle
+          small= ' - ' + context.subtitle

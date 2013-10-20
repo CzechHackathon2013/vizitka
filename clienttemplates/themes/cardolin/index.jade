@@ -5,14 +5,35 @@ block head
   link(href='/css/cardolin.min.css', rel='stylesheet', type='text/css')
 
 block content
-
   for item, i in data.bricks
     context = data.bricks[i].content
     if item.type == "meta"
+      - footerContent = context
       include meta
+
     else if item.type == "markdown"
       include markdown
     else if item.type == "image"
       include image
     else if item.type == "portfolio"
       include portfolio
+    else if item.type == "title"
+      include title
+
+block footer
+  p
+    a.email(href='mailto: footerContent.email')= footerContent.email
+
+    if footerContent.phone
+      br
+      | mobile:
+      span.phone= footerContent.phone
+  .social
+    if footerContent.linkedin
+      a(href=footerContent.linkedin) LinkedIn
+    if footerContent.facebook
+      a(href=footerContent.facebook) Facebook
+    if footerContent.twitter
+      a(href=footerContent.twitter) Twitter
+    if footerContent.dribble
+      a(href=footerContent.dribble) Dribble
