@@ -1,6 +1,7 @@
 /*global app, me, $*/
 var stats = require('loading-stats');
 var Backbone = require('backbone');
+var BackfireEnhance = require('backfire-enhance');
 var _ = require('underscore');
 var logger = require('andlog');
 var config = require('clientconfig');
@@ -21,6 +22,11 @@ module.exports = {
     // add the ability to bind/unbind/trigger events
     // to the main app object.
     _.extend(this, Backbone.Events);
+
+    // hack: enhance backbone with firebase support
+    BackfireEnhance.enhanceBackbone(Backbone, window.Firebase, _);
+    window.Backbone = Backbone;
+    window._ = _;
 
     var self = window.app = this;
 

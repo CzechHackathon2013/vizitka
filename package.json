@@ -23,6 +23,7 @@
     "stylus": "",
     "memjs": "",
     "firebase": "",
+    "backfire-enhance": "https://github.com/tkafka/backfire-enhance/tarball/master",
     "andlog": "0.0.4",
     "backbone": "1.0.0",
     "clientconfig": "0.0.4",

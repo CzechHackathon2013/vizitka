@@ -50,7 +50,7 @@ clientApp = new Moonboots(
   developmentMode: process.env.NODE_ENV == "development"
   libraries: [
     __dirname + "/clientapp/libraries/zepto.js"
-    # , __dirname + "/clientapp/libraries/firebase.js"
+    # ,__dirname + "/clientapp/libraries/backbone-firebase.js"
   ]
   stylesheets: [ __dirname + "/public/css/lib/bootstrap.css",  __dirname + "/public/css/app.css" ]
   beforeBuildCSS: (done) ->
