@@ -18,7 +18,6 @@ marked.setOptions({
  * @param content contains { meta:, data: }
  * @param callback (err, result html)
  */
-
 exports.renderPage = function(content, callback) {
   content = unmarkPage(content);
   console.error(content);
