@@ -35,7 +35,8 @@
     "human-view": "1.2.0",
     "templatizer": "0.1.2",
     "underscore": "1.5.2",
-    "favicon-setter": "0.1.1"
+    "favicon-setter": "0.1.1",
+    "marked": ""
   },
   "devDependencies": {
     "nodemon": "",
