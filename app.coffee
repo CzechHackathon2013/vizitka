@@ -45,7 +45,11 @@ clientApp = new Moonboots(
     __dirname + "/clientapp/libraries/zepto.js"
     # ,__dirname + "/clientapp/libraries/backbone-firebase.js"
   ]
-  stylesheets: [ __dirname + "/public/css/lib/bootstrap.css",  __dirname + "/public/css/app.css" ]
+  stylesheets: [
+    __dirname + "/public/css/lib/bootstrap.css",
+    __dirname + "/public/css/app.css",
+    __dirname + "/public/css/cardolin.min.css"
+  ]
   beforeBuildCSS: (done) ->
     inputFile = __dirname + '/public/css/app.styl'
     outputFile = __dirname + '/public/css/app.css'

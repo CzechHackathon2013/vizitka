@@ -36,7 +36,7 @@ exports.renderPage = function(content, callback) {
  * @param callback (err, result html)
  */
 exports.renderBrick = function(brickData, theme, callback) {
-  brickData = unmarkBrick(brickData);
+  // brickData = unmarkBrick(brickData);
   /*
   var filename = __dirname + '/../../../clienttemplates/themes/' + theme + '/' + brickData.type + '.jade';
   var opt = { filename: theme + '/' + brickData['type'], pretty: true, context: brickData.content };
