@@ -1,9 +1,11 @@
 var HumanModel = require('human-model');
+var FireUser = require('./FireUser');
 var _ = require('underscore');
 
 module.exports = HumanModel.define({
   type: 'user',
   props: {
+    firebaseUserConfig: ['object', false, undefined],
     firebaseUser: ['object', false, undefined],
 
     loginError: ['string', false, undefined],
@@ -31,7 +33,9 @@ module.exports = HumanModel.define({
     var auth = new window.FirebaseSimpleLogin(firebaseEndpoint, _.bind(function (error, user) {
       if (user && !error) {
         this.loginError = undefined;
-        this.firebaseUser = user;
+        this.firebaseUserConfig = user;
+        this.firebaseUser = new FireUser();
+        this.firebaseUser.initWithUserId(user.id);
 
         console.log('user', user);
 
@@ -44,6 +48,7 @@ module.exports = HumanModel.define({
           // user cancelled
           this.loginError = undefined;
         }
+        this.firebaseUserConfig = undefined;
         this.firebaseUser = undefined;
       }
     }, this));
