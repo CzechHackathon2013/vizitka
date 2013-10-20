@@ -37,8 +37,6 @@ module.exports = HumanModel.define({
         this.firebaseUser = new FireUser();
         this.firebaseUser.initWithUid(user.uid);
 
-        console.log('Use this user id for Firebase:', user.uid);
-
         app.trigger('login', this);
       } else {
         if (error) {

@@ -14,6 +14,7 @@ module.exports = BaseView.extend({
       if (app.user.firebaseUser) {
         // login
         this.renderCollection(app.user.firebaseUser.pages, FirePageView, this.$('.user-pages')[0]);
+        this.$('.uid').text(app.user.firebaseUserConfig.uid);
       } else {
         // TODO: stop rendering collection
       }
